@@ -1,0 +1,375 @@
+<!-- ========================================================================= -->
+<!-- HEADER BÁN PC & LINH KIỆN MÁY TÍNH (TÔNG MÀU ĐỎ & TRẮNG)                  -->
+<!-- 100% THUẦN HTML & TAILWIND CSS - KHÔNG SỬ DỤNG JAVASCRIPT                 -->
+<!-- ========================================================================= -->
+<header class="w-full bg-white text-neutral-800 shadow-md sticky top-0 z-50 font-sans">
+  
+  <!-- 1. TOP BAR (Thanh tiện ích siêu mỏng phía trên cùng) -->
+  <div class="bg-red-700 text-white text-xs border-b border-red-800/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-8 flex items-center justify-between">
+      
+      <!-- Thông điệp cam kết -->
+      <div class="flex items-center gap-4">
+        <span class="hidden sm:inline-flex items-center gap-1.5 font-medium text-red-100">
+          <svg class="w-3.5 h-3.5 text-red-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+          Bảo hành chính hãng 36 tháng · 1 đổi 1 trong 30 ngày
+        </span>
+        <span class="inline-flex sm:hidden text-[11px] font-medium text-red-100">
+          Miễn phí giao hàng đơn từ 500k · Trả góp 0%
+        </span>
+      </div>
+
+      <!-- Liên kết tiện ích: Hotline, Showroom, Tra cứu -->
+      <div class="flex items-center gap-5 text-xs text-red-100 font-medium">
+        <a href="tel:19006868" class="hover:text-white transition-colors flex items-center gap-1">
+          <svg class="w-3.5 h-3.5 text-white animate-pulse" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z"/>
+          </svg>
+          <span>Hotline: <strong class="text-white">1900 6868</strong></span>
+        </a>
+        <span class="hidden md:inline text-red-400">|</span>
+        <a href="#showroom" class="hidden md:flex items-center gap-1 hover:text-white transition-colors">
+          <span>Hệ thống Cửa hàng</span>
+        </a>
+        <span class="hidden lg:inline text-red-400">|</span>
+        <a href="#order-track" class="hidden lg:flex items-center gap-1 hover:text-white transition-colors">
+          <span>Tra cứu đơn hàng</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. MAIN HEADER (Đỏ tươi #DC2626 + Trắng: Logo, Tìm kiếm, Giỏ hàng) -->
+  <div class="bg-red-600 text-white shadow-inner">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-3 lg:gap-6">
+      
+      <!-- Nút mở Menu Mobile (Pure CSS qua label + checkbox) -->
+      <label for="mobile-menu-toggle" class="lg:hidden p-2 rounded-lg bg-red-700 hover:bg-red-800 text-white cursor-pointer select-none shrink-0" aria-label="Menu">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </label>
+
+      <!-- LOGO THƯƠNG HIỆU (Huy hiệu đỏ trắng) -->
+      <a href="/" class="flex items-center gap-2.5 shrink-0 group">
+        <div class="w-10 h-10 rounded-xl bg-white text-red-600 flex items-center justify-center shadow-md font-black text-2xl group-hover:scale-105 transition-transform">
+          <svg class="w-6 h-6 text-red-600" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M4 4h16a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2zm0 2v10h16V6H4zm4 13h8v2H8v-2z" />
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xl font-extrabold tracking-wider leading-none text-white drop-shadow-sm flex items-center gap-1">
+            REDLINE<span class="text-red-200 font-light">PC</span>
+          </span>
+          <span class="text-[10px] tracking-widest text-red-100 font-semibold uppercase leading-tight mt-0.5">
+            Gaming & Workstation
+          </span>
+        </div>
+      </a>
+
+      <!-- NÚT DANH MỤC SẢN PHẨM & MEGA MENU (Mở bằng CSS hover) -->
+      <div class="relative group hidden xl:block shrink-0">
+        <button type="button" class="flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-red-700/80 hover:bg-red-700 text-white font-semibold text-sm border border-red-500/40 shadow-sm cursor-pointer">
+          <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+          </svg>
+          <span>Danh Mục Sản Phẩm</span>
+          <svg class="w-4 h-4 text-red-200 group-hover:rotate-180 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        <!-- Dropdown Mega Menu 4 Cột (Pure CSS hover) -->
+        <div class="absolute left-0 top-full pt-2 w-[800px] hidden group-hover:block z-50">
+          <div class="bg-white text-neutral-800 rounded-xl shadow-2xl border border-neutral-200 p-5 grid grid-cols-4 gap-6">
+            
+            <!-- Cột 1: PC Gaming -->
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-red-600 border-b border-red-100 pb-1.5 mb-2.5">
+                PC Gaming
+              </h4>
+              <ul class="space-y-1.5 text-xs text-neutral-600">
+                <li><a href="#gaming-ultra" class="hover:text-red-600 block transition-colors">PC Gaming Cao Cấp 4K</a></li>
+                <li><a href="#gaming-mid" class="hover:text-red-600 block transition-colors">PC Gaming Tầm Trung 2K</a></li>
+                <li><a href="#gaming-entry" class="hover:text-red-600 block transition-colors">PC Gaming Phổ Thông</a></li>
+                <li><a href="#gaming-esports" class="hover:text-red-600 block transition-colors">PC Thi Đấu Esport</a></li>
+              </ul>
+            </div>
+
+            <!-- Cột 2: PC Workstation -->
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-red-600 border-b border-red-100 pb-1.5 mb-2.5">
+                Workstation & AI
+              </h4>
+              <ul class="space-y-1.5 text-xs text-neutral-600">
+                <li><a href="#render" class="hover:text-red-600 block transition-colors">PC Đồ Họa 3D / Render</a></li>
+                <li><a href="#ai-deep" class="hover:text-red-600 block transition-colors">PC Huấn Luyện Dữ Liệu AI</a></li>
+                <li><a href="#video-edit" class="hover:text-red-600 block transition-colors">PC Dựng Phim Chuyên Nghiệp</a></li>
+                <li><a href="#cad-cam" class="hover:text-red-600 block transition-colors">PC Thiết Kế Cơ Khí & Kiến Trúc</a></li>
+              </ul>
+            </div>
+
+            <!-- Cột 3: Linh Kiện Máy Tính -->
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-red-600 border-b border-red-100 pb-1.5 mb-2.5">
+                Linh Kiện PC
+              </h4>
+              <ul class="space-y-1.5 text-xs text-neutral-600">
+                <li><a href="#vga" class="hover:text-red-600 block font-semibold text-neutral-800 transition-colors">Card Đồ Họa (VGA)</a></li>
+                <li><a href="#cpu" class="hover:text-red-600 block transition-colors">Bộ Vi Xử Lý (CPU)</a></li>
+                <li><a href="#mainboard" class="hover:text-red-600 block transition-colors">Bo Mạch Chủ</a></li>
+                <li><a href="#ram" class="hover:text-red-600 block transition-colors">Bộ Nhớ RAM Tản Thép</a></li>
+                <li><a href="#ssd" class="hover:text-red-600 block transition-colors">Ổ Cứng SSD Tốc Độ Cao</a></li>
+              </ul>
+            </div>
+
+            <!-- Cột 4: Banner Ưu Đãi Nhỏ Trong Menu -->
+            <div class="bg-red-50/70 p-3.5 rounded-lg border border-red-100 flex flex-col justify-between">
+              <div>
+                <span class="text-[10px] font-bold text-red-600 uppercase block mb-1">Gói Quà Tặng</span>
+                <h5 class="text-xs font-bold text-neutral-900 leading-snug">Tặng Tản Nhiệt Nước RGB Khi Build PC</h5>
+                <p class="text-[11px] text-neutral-500 mt-1">Áp dụng cho mọi dàn PC đặt hàng trong tuần này.</p>
+              </div>
+              <a href="#builder" class="mt-3 w-full py-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded text-center block transition-colors shadow-sm">
+                Tự Build PC &rarr;
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- THANH TÌM KIẾM THÔNG MINH (Pure CSS focus-within) -->
+      <div class="flex-1 max-w-xl relative group focus-within:z-50">
+        <form action="/search" method="GET" class="relative flex items-center">
+          <input
+            type="text"
+            name="q"
+            placeholder="Tìm kiếm PC Gaming, CPU, Card VGA, RAM, Màn hình..."
+            class="w-full bg-white text-neutral-900 placeholder-neutral-400 text-sm rounded-lg pl-10 pr-24 py-2.5 border border-transparent focus:border-red-400 focus:outline-none focus:ring-2 focus:ring-red-300 shadow-sm transition-all"
+            autocomplete="off"
+          />
+          <!-- Icon Kính lúp -->
+          <div class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-neutral-400">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <!-- Nút Tìm -->
+          <button type="submit" class="absolute right-1.5 top-1/2 -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white px-3.5 py-1.5 rounded-md text-xs font-bold transition-colors">
+            Tìm
+          </button>
+        </form>
+
+        <!-- Bảng Gợi Ý Từ Khóa (Tự mở khi ô tìm kiếm được focus) -->
+        <div class="absolute left-0 right-0 top-full pt-2 hidden group-focus-within:block z-50">
+          <div class="bg-white rounded-xl shadow-xl border border-neutral-200 p-3 text-neutral-800 text-xs">
+            <span class="font-semibold text-neutral-400 uppercase text-[10px] tracking-wider block mb-2">Tìm kiếm phổ biến:</span>
+            <div class="flex flex-wrap gap-1.5 mb-2">
+              <a href="#vga-series" class="px-2.5 py-1 bg-neutral-100 hover:bg-red-50 hover:text-red-600 rounded font-medium transition-colors">Card Đồ Họa 16GB</a>
+              <a href="#cpu-gen" class="px-2.5 py-1 bg-neutral-100 hover:bg-red-50 hover:text-red-600 rounded font-medium transition-colors">CPU Đa Nhân</a>
+              <a href="#pc-15m" class="px-2.5 py-1 bg-neutral-100 hover:bg-red-50 hover:text-red-600 rounded font-medium transition-colors">PC Gaming 15 Triệu</a>
+              <a href="#ram-32" class="px-2.5 py-1 bg-neutral-100 hover:bg-red-50 hover:text-red-600 rounded font-medium transition-colors">RAM DDR5 32GB</a>
+              <a href="#screen" class="px-2.5 py-1 bg-neutral-100 hover:bg-red-50 hover:text-red-600 rounded font-medium transition-colors">Màn Hình 240Hz</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CỤM TIỆN ÍCH: PHÍM TẮT BUILD PC + TÀI KHOẢN + GIỎ HÀNG -->
+      <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
+        
+        <!-- Phím tắt Xây Dựng Cấu Hình PC -->
+        <a href="#builder" class="hidden md:flex items-center gap-2 px-3 py-2 rounded-lg bg-red-700/90 hover:bg-white hover:text-red-600 text-white font-semibold text-xs border border-red-500/50 shadow-sm transition-all duration-150">
+          <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+          </svg>
+          <span class="whitespace-nowrap">Xây Dựng Cấu Hình</span>
+        </a>
+
+        <!-- Nút Giỏ Hàng (Cart) có Badge & Popup xem trước thuần CSS -->
+        <div class="relative group">
+          <a href="#cart" class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white text-red-600 hover:bg-red-50 font-bold text-xs shadow-md transition-all duration-150">
+            <div class="relative">
+              <svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <!-- Badge số lượng -->
+              <span class="absolute -top-2 -right-2 bg-red-600 text-white font-extrabold text-[10px] w-4 h-4 rounded-full flex items-center justify-center border-2 border-white">2</span>
+            </div>
+            <div class="hidden sm:flex flex-col text-left">
+              <span class="text-[10px] text-neutral-500 font-medium leading-none">Giỏ hàng</span>
+              <span class="text-xs font-extrabold text-red-600 leading-tight mt-0.5">34.890.000₫</span>
+            </div>
+          </a>
+
+          <!-- Popup Mini Cart Preview (Mở bằng CSS hover) -->
+          <div class="absolute right-0 top-full pt-2 w-80 sm:w-96 hidden group-hover:block z-50">
+            <div class="bg-white rounded-xl shadow-2xl border border-neutral-200 p-4 text-neutral-800 text-xs">
+              <div class="flex items-center justify-between border-b border-neutral-100 pb-2 mb-3">
+                <span class="font-bold text-neutral-900">Sản phẩm trong giỏ (2)</span>
+                <a href="#cart" class="text-red-600 hover:underline text-[11px] font-semibold">Xem tất cả</a>
+              </div>
+
+              <!-- Danh sách món mẫu trong giỏ -->
+              <div class="space-y-3 max-h-56 overflow-y-auto pr-1">
+                <div class="flex items-center justify-between gap-3 py-1 border-b border-neutral-50">
+                  <div class="flex-1 min-w-0">
+                    <p class="font-semibold text-neutral-900 truncate">PC Redline Gaming Core i5 / RTX 4060</p>
+                    <p class="text-[11px] text-neutral-500">Số lượng: 1</p>
+                  </div>
+                  <span class="font-bold text-red-600 shrink-0">19.990.000₫</span>
+                </div>
+                <div class="flex items-center justify-between gap-3 py-1">
+                  <div class="flex-1 min-w-0">
+                    <p class="font-semibold text-neutral-900 truncate">Màn Hình Gaming 27" 2K 180Hz</p>
+                    <p class="text-[11px] text-neutral-500">Số lượng: 1</p>
+                  </div>
+                  <span class="font-bold text-red-600 shrink-0">14.900.000₫</span>
+                </div>
+              </div>
+
+              <!-- Tổng tạm tính & Nút thanh toán -->
+              <div class="border-t border-neutral-100 pt-3 mt-3">
+                <div class="flex items-center justify-between mb-3 text-sm">
+                  <span class="text-neutral-600 font-medium">Tổng tạm tính:</span>
+                  <span class="font-extrabold text-red-600 text-base">34.890.000₫</span>
+                </div>
+                <a href="#checkout" class="block w-full py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold text-center rounded-lg shadow-md transition-colors">
+                  Tiến Hành Thanh Toán Ngay
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. NAVIGATION BAR (Thanh menu ngang nền trắng với line đỏ tinh tế) -->
+  <nav class="bg-white border-b border-neutral-200 hidden lg:block">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <ul class="flex items-center gap-1 text-xs font-bold text-neutral-700">
+        <li>
+          <a href="#pc-gaming" class="px-3.5 py-3 inline-flex items-center gap-1.5 hover:text-red-600 hover:bg-red-50/60 transition-colors border-b-2 border-transparent hover:border-red-600">
+            <span class="w-1.5 h-1.5 rounded-full bg-red-600"></span>
+            <span>PC GAMING</span>
+          </a>
+        </li>
+        <li>
+          <a href="#pc-workstation" class="px-3.5 py-3 inline-flex items-center gap-1.5 hover:text-red-600 hover:bg-red-50/60 transition-colors border-b-2 border-transparent hover:border-red-600">
+            <span>PC WORKSTATION</span>
+          </a>
+        </li>
+        <li>
+          <a href="#pc-office" class="px-3.5 py-3 inline-flex items-center gap-1.5 hover:text-red-600 hover:bg-red-50/60 transition-colors border-b-2 border-transparent hover:border-red-600">
+            <span>PC VĂN PHÒNG</span>
+          </a>
+        </li>
+
+        <!-- Mục Linh Kiện PC có Dropdown Menu con (Pure CSS) -->
+        <li class="relative group">
+          <a href="#components" class="px-3.5 py-3 inline-flex items-center gap-1 hover:text-red-600 hover:bg-red-50/60 transition-colors border-b-2 border-transparent group-hover:border-red-600 group-hover:text-red-600">
+            <span>LINH KIỆN PC</span>
+            <svg class="w-3.5 h-3.5 text-neutral-400 group-hover:rotate-180 transition-transform duration-150" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+          <div class="absolute left-0 top-full pt-1 w-56 hidden group-hover:block z-40">
+            <div class="bg-white rounded-lg shadow-xl border border-neutral-200 py-1.5 text-xs text-neutral-700">
+              <a href="#vga" class="flex items-center justify-between px-3.5 py-2 hover:bg-red-50 hover:text-red-600 font-bold text-neutral-800">
+                <span>Card Đồ Họa (VGA)</span>
+                <span class="text-[10px] text-red-500 bg-red-100 px-1.5 py-0.5 rounded">Hot</span>
+              </a>
+              <a href="#cpu" class="block px-3.5 py-2 hover:bg-red-50 hover:text-red-600">Bộ Vi Xử Lý (CPU)</a>
+              <a href="#mainboard" class="block px-3.5 py-2 hover:bg-red-50 hover:text-red-600">Bo Mạch Chủ</a>
+              <a href="#ram" class="block px-3.5 py-2 hover:bg-red-50 hover:text-red-600">Bộ Nhớ RAM</a>
+              <a href="#ssd" class="block px-3.5 py-2 hover:bg-red-50 hover:text-red-600">Ổ Cứng SSD NVMe</a>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <a href="#monitors" class="px-3.5 py-3 inline-flex items-center gap-1.5 hover:text-red-600 hover:bg-red-50/60 transition-colors border-b-2 border-transparent hover:border-red-600">
+            <span>MÀN HÌNH MÁY TÍNH</span>
+          </a>
+        </li>
+        <li>
+          <a href="#gear" class="px-3.5 py-3 inline-flex items-center gap-1.5 hover:text-red-600 hover:bg-red-50/60 transition-colors border-b-2 border-transparent hover:border-red-600">
+            <span>GAMING GEAR</span>
+          </a>
+        </li>
+        <li>
+          <a href="#hot-deals" class="px-3.5 py-3 inline-flex items-center gap-1.5 text-red-600 hover:bg-red-50/80 transition-colors border-b-2 border-transparent hover:border-red-600 font-extrabold">
+            <span>🔥 KHUYẾN MÃI HOT</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="flex items-center gap-2 text-xs font-semibold text-neutral-600">
+        <a href="#builder" class="text-red-600 hover:text-red-700 flex items-center gap-1 font-bold group">
+          <span>Build Cấu Hình PC Online</span>
+          <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 4. MENU DI ĐỘNG (Pure CSS Checkbox Hack không dùng JavaScript) -->
+  <input type="checkbox" id="mobile-menu-toggle" class="peer hidden" />
+
+  <!-- Lớp phủ nền mờ (Backdrop) -->
+  <label for="mobile-menu-toggle" class="fixed inset-0 bg-neutral-900/60 z-50 opacity-0 pointer-events-none peer-checked:opacity-100 peer-checked:pointer-events-auto transition-opacity duration-300 lg:hidden cursor-pointer" aria-hidden="true"></label>
+
+  <!-- Drawer trượt từ bên trái ra -->
+  <aside class="fixed top-0 bottom-0 left-0 w-80 max-w-[85vw] bg-white z-50 shadow-2xl flex flex-col -translate-x-full peer-checked:translate-x-0 transition-transform duration-300 ease-out lg:hidden">
+    <div class="bg-red-600 text-white p-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-white text-red-600 flex items-center justify-center font-black text-xl shadow">R</div>
+        <span class="font-extrabold text-base tracking-wide">REDLINE PC</span>
+      </div>
+      <label for="mobile-menu-toggle" class="p-1.5 rounded-lg bg-red-700 hover:bg-red-800 text-white cursor-pointer select-none">✕</label>
+    </div>
+
+    <!-- Phím tắt nhanh Mobile -->
+    <div class="p-3 bg-red-50 border-b border-red-100 flex items-center gap-2">
+      <a href="#builder" class="flex-1 py-2 bg-red-600 text-white text-xs font-bold rounded-lg text-center shadow-sm">⚡ Xây Dựng Cấu Hình</a>
+      <a href="tel:19006868" class="py-2 px-3 bg-white border border-red-200 text-red-600 text-xs font-bold rounded-lg text-center">📞 1900 6868</a>
+    </div>
+
+    <!-- Danh sách danh mục Mobile dùng thẻ HTML5 <details> -->
+    <div class="flex-1 overflow-y-auto p-4 space-y-2 text-sm font-semibold text-neutral-800">
+      <a href="#pc-gaming" class="block py-2 px-2.5 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors">🎮 PC Gaming Hiệu Năng Cao</a>
+      <a href="#pc-workstation" class="block py-2 px-2.5 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors">💼 PC Workstation & AI Render</a>
+      <a href="#pc-office" class="block py-2 px-2.5 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors">🏢 PC Doanh Nghiệp & Văn Phòng</a>
+
+      <!-- Accordion Linh Kiện thuần HTML5 -->
+      <details class="group/acc rounded-lg border border-neutral-100 bg-neutral-50/50 open:bg-white open:border-red-200 transition-all">
+        <summary class="flex items-center justify-between p-2.5 cursor-pointer select-none list-none text-neutral-800 group-open/acc:text-red-600">
+          <span>⚙️ Linh Kiện Máy Tính</span>
+          <span class="text-xs text-neutral-400 group-open/acc:rotate-180 transition-transform">▼</span>
+        </summary>
+        <div class="pl-4 pr-2 pb-2.5 pt-1 space-y-1 text-xs text-neutral-600 font-normal border-t border-neutral-100 mt-1">
+          <a href="#vga" class="block py-1 hover:text-red-600">Card Đồ Họa (VGA)</a>
+          <a href="#cpu" class="block py-1 hover:text-red-600">Bộ Vi Xử Lý (CPU)</a>
+          <a href="#mainboard" class="block py-1 hover:text-red-600">Bo Mạch Chủ (Mainboard)</a>
+          <a href="#ram" class="block py-1 hover:text-red-600">Bộ Nhớ RAM</a>
+          <a href="#ssd" class="block py-1 hover:text-red-600">Ổ Cứng SSD NVMe</a>
+        </div>
+      </details>
+
+      <a href="#monitors" class="block py-2 px-2.5 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors">🖥️ Màn Hình Máy Tính 240Hz</a>
+      <a href="#gear" class="block py-2 px-2.5 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors">🎧 Gaming Gear & Phụ Kiện</a>
+      <a href="#promo" class="block py-2 px-2.5 rounded-lg text-red-600 font-extrabold bg-red-50/80">🔥 Khuyến Mãi Hot Nhất Tháng</a>
+    </div>
+
+    <div class="p-4 border-t border-neutral-200 text-xs text-neutral-500 bg-neutral-50">
+      <p class="font-semibold text-neutral-800 mb-1">REDLINE PC VIỆT NAM</p>
+      <p>Showroom: 123 Thái Hà, Đống Đa, Hà Nội</p>
+      <p class="mt-1 text-[11px] text-neutral-400">© 2026 Redline PC. Pure HTML/CSS Header.</p>
+    </div>
+  </aside>
+</header>
