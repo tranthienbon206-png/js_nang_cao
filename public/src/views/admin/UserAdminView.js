@@ -4,20 +4,21 @@ import { escapeHtml } from '../../utils/helpers.js';
 
 export default class UserAdminView extends BaseView {
   renderList(users) {
-    this.setHTML(`
-      <div class="container-fluid py-3">
-        <h2 class="mb-4">Quản lý người dùng</h2>
-
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <div class="mb-3">
-              <input id="user-search" class="form-control"
-                placeholder="Tìm theo tên, username hoặc email...">
+    this.renderAdminPage({
+      title: 'Người dùng',
+      description: 'Quản lý tài khoản, quyền truy cập và trạng thái thành viên.',
+      content: `
+            <div class="admin-panel-toolbar">
+              <div class="admin-filter-search">
+                <i class="bi bi-search" aria-hidden="true"></i>
+                <input id="user-search" class="form-control"
+                  placeholder="Tìm theo tên, username hoặc email..." aria-label="Tìm người dùng">
+              </div>
             </div>
 
-            <div class="table-responsive">
-              <table class="table table-hover align-middle">
-                <thead class="table-light">
+            <div class="table-responsive admin-table-wrap">
+              <table class="table table-hover align-middle admin-data-table">
+                <thead>
                   <tr>
                     <th>ID</th>
                     <th>Tài khoản</th>
@@ -29,7 +30,7 @@ export default class UserAdminView extends BaseView {
                   </tr>
                 </thead>
                 <tbody>
-                  ${users.map(u => `
+                  ${users.length ? users.map(u => `
                     <tr data-user-row="${u.id}">
                       <td>${u.id}</td>
                       <td>${escapeHtml(u.username ?? '')}</td>
@@ -50,15 +51,13 @@ export default class UserAdminView extends BaseView {
                           data-edit="${u.id}">Sửa</button>
                       </td>
                     </tr>
-                  `).join('')}
+                  `).join('') : '<tr><td colspan="7"><div class="admin-empty-state">Chưa có người dùng nào.</div></td></tr>'}
                 </tbody>
               </table>
             </div>
-            <p class="text-muted mb-0">Tổng số: ${users.length} người dùng</p>
-          </div>
-        </div>
-      </div>
-    `);
+            <div class="admin-table-footer">Tổng cộng <strong>${users.length}</strong> người dùng</div>
+      `
+    });
   }
 
   renderForm(user) {
