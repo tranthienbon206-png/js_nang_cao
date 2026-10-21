@@ -3,20 +3,15 @@ import { escapeHtml } from '../../utils/helpers.js';
 
 export default class CategoryAdminView extends BaseView {
   renderList(categories) {
-    this.setHTML(`
-      <div class="container-fluid py-3">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <h2 class="mb-0">Quản lý danh mục</h2>
-          <a class="btn btn-primary" href="#/admin/categories/add">
-            + Thêm danh mục
-          </a>
-        </div>
-
-        <div class="card shadow-sm">
-          <div class="card-body">
+    this.renderAdminPage({
+      title: 'Danh mục',
+      description: 'Quản lý và sắp xếp các danh mục sản phẩm.',
+      action: '<a class="btn btn-primary" href="#/admin/categories/add"><i class="bi bi-plus-lg me-2" aria-hidden="true"></i>Thêm danh mục</a>',
+      content: `
+          <div class="admin-table-wrap">
             <div class="table-responsive">
-              <table class="table table-hover align-middle">
-                <thead class="table-light">
+              <table class="table table-hover align-middle admin-data-table">
+                <thead>
                   <tr>
                     <th>ID</th>
                     <th>Tên danh mục</th>
@@ -24,7 +19,7 @@ export default class CategoryAdminView extends BaseView {
                   </tr>
                 </thead>
                 <tbody>
-                  ${categories.map(c => `
+                  ${categories.length ? categories.map(c => `
                     <tr>
                       <td>${c.id}</td>
                       <td>${escapeHtml(c.name ?? '')}</td>
@@ -35,15 +30,14 @@ export default class CategoryAdminView extends BaseView {
                           data-delete="${c.id}">Xóa</button>
                       </td>
                     </tr>
-                  `).join('')}
+                  `).join('') : '<tr><td colspan="3"><div class="admin-empty-state">Chưa có danh mục nào.</div></td></tr>'}
                 </tbody>
               </table>
             </div>
-            <p class="text-muted mb-0">Tổng số: ${categories.length} danh mục</p>
           </div>
-        </div>
-      </div>
-    `);
+          <div class="admin-table-footer">Tổng cộng <strong>${categories.length}</strong> danh mục</div>
+      `
+    });
   }
 
   renderForm(category = null) {

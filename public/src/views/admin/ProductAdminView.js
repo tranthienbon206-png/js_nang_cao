@@ -4,27 +4,35 @@ import { formatPrice, escapeHtml } from '../../utils/helpers.js';
 export default class ProductAdminView extends BaseView {
   renderList(products, categories) {
     const catName = id => categories.find(c => c.id === Number(id))?.name ?? '';
-    this.setHTML(`
-      <h2>Quản lý sản phẩm</h2>
-      <p><a class="btn" href="#/admin/products/add">+ Thêm sản phẩm</a></p>
-      <table>
-        <thead><tr><th>ID</th><th>Ảnh</th><th>Tên</th><th>Giá</th><th>Danh mục</th><th></th></tr></thead>
-        <tbody>
-          ${products.map(p => `
-            <tr>
-              <td>${p.id}</td>
-              <td><img src="${p.image}" alt=""></td>
-              <td>${escapeHtml(p.name)}</td>
-              <td>${formatPrice(p.price)}</td>
-              <td>${escapeHtml(catName(p.categoryId))}</td>
-              <td>
-                <a class="btn btn-light" href="#/admin/products/edit/${p.id}">Sửa</a>
-                <button class="btn btn-danger" data-delete="${p.id}">Xóa</button>
-              </td>
-            </tr>`).join('')}
-        </tbody>
-      </table>
-    `);
+    this.renderAdminPage({
+      title: 'Sản phẩm',
+      description: 'Theo dõi thông tin, giá bán và danh mục sản phẩm.',
+      action: '<a class="btn btn-primary" href="#/admin/products/add"><i class="bi bi-plus-lg me-2" aria-hidden="true"></i>Thêm sản phẩm</a>',
+      content: `
+        <div class="table-responsive admin-table-wrap">
+          <table class="table table-hover align-middle admin-data-table">
+            <thead>
+              <tr><th>ID</th><th>Ảnh</th><th>Tên sản phẩm</th><th>Giá</th><th>Danh mục</th><th>Thao tác</th></tr>
+            </thead>
+            <tbody>
+              ${products.length ? products.map(p => `
+                <tr>
+                  <td class="text-muted">#${p.id}</td>
+                  <td><img class="admin-product-thumb" src="${escapeHtml(p.image ?? '')}" alt="${escapeHtml(p.name ?? '')}"></td>
+                  <td class="fw-semibold">${escapeHtml(p.name ?? '')}</td>
+                  <td class="text-nowrap fw-semibold">${formatPrice(p.price)}</td>
+                  <td>${escapeHtml(catName(p.categoryId))}</td>
+                  <td class="text-nowrap">
+                    <a class="btn btn-sm btn-outline-primary" href="#/admin/products/edit/${p.id}">Sửa</a>
+                    <button class="btn btn-sm btn-outline-danger" data-delete="${p.id}">Xóa</button>
+                  </td>
+                </tr>`).join('') : '<tr><td colspan="6"><div class="admin-empty-state">Chưa có sản phẩm nào.</div></td></tr>'}
+            </tbody>
+          </table>
+        </div>
+        <div class="admin-table-footer">Tổng cộng <strong>${products.length}</strong> sản phẩm</div>
+      `
+    });
   }
 
   // product = null -> form thêm; có product -> form sửa
