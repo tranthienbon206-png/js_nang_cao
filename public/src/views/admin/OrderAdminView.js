@@ -3,32 +3,30 @@ import { formatPrice, escapeHtml } from '../../utils/helpers.js';
 
 export default class OrderAdminView extends BaseView {
   renderList(orders) {
-    this.setHTML(`
-      <div class="container-fluid py-3">
-        <h2 class="mb-4">Quản lý đơn hàng</h2>
-
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <div class="row g-3 mb-3">
-              <div class="col-md-8">
-                <input id="order-search" class="form-control"
-                  placeholder="Tìm mã đơn, tên khách hàng, số điện thoại...">
-              </div>
-              <div class="col-md-4">
-                <select id="order-status-filter" class="form-select">
+    this.renderAdminPage({
+      title: 'Đơn hàng',
+      description: 'Theo dõi đơn hàng và cập nhật trạng thái xử lý.',
+      content: `
+          <div class="admin-panel-toolbar">
+            <div class="admin-filter-search">
+              <i class="bi bi-search" aria-hidden="true"></i>
+              <input id="order-search" class="form-control"
+                placeholder="Tìm mã đơn, tên khách hàng, số điện thoại..." aria-label="Tìm đơn hàng">
+            </div>
+            <div class="admin-filter-select">
+              <select id="order-status-filter" class="form-select" aria-label="Lọc theo trạng thái">
                   <option value="">Tất cả trạng thái</option>
                   <option value="pending">Chờ xử lý</option>
                   <option value="confirmed">Đã xác nhận</option>
                   <option value="shipping">Đang giao</option>
                   <option value="completed">Hoàn thành</option>
                   <option value="cancelled">Đã hủy</option>
-                </select>
-              </div>
+              </select>
             </div>
-
-            <div class="table-responsive">
-              <table class="table table-hover align-middle">
-                <thead class="table-light">
+          </div>
+          <div class="table-responsive admin-table-wrap">
+              <table class="table table-hover align-middle admin-data-table">
+                <thead>
                   <tr>
                     <th>Mã đơn</th>
                     <th>Khách hàng</th>
@@ -40,7 +38,7 @@ export default class OrderAdminView extends BaseView {
                   </tr>
                 </thead>
                 <tbody>
-                  ${orders.map(o => `
+                  ${orders.length ? orders.map(o => `
                     <tr data-order-row="${o.id}"
                       data-status="${escapeHtml(o.status ?? 'pending')}">
                       <td>#${o.id}</td>
@@ -54,15 +52,13 @@ export default class OrderAdminView extends BaseView {
                           data-detail="${o.id}">Chi tiết</button>
                       </td>
                     </tr>
-                  `).join('')}
+                  `).join('') : '<tr><td colspan="7"><div class="admin-empty-state">Chưa có đơn hàng nào.</div></td></tr>'}
                 </tbody>
               </table>
-            </div>
-            <p class="text-muted mb-0">Tổng số: ${orders.length} đơn hàng</p>
           </div>
-        </div>
-      </div>
-    `);
+          <div class="admin-table-footer">Tổng cộng <strong>${orders.length}</strong> đơn hàng</div>
+      `
+    });
   }
 
   statusBadge(status) {

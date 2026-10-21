@@ -3,19 +3,18 @@ import { escapeHtml } from '../../utils/helpers.js';
 
 export default class ContactAdminView extends BaseView {
   renderList(contacts) {
-    this.setHTML(`
-      <div class="container-fluid py-3">
-        <h2 class="mb-4">Quản lý liên hệ</h2>
-
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <div class="row g-3 mb-3">
-              <div class="col-md-8">
+    this.renderAdminPage({
+      title: 'Liên hệ',
+      description: 'Tiếp nhận phản hồi và theo dõi tình trạng xử lý liên hệ.',
+      content: `
+            <div class="admin-panel-toolbar">
+              <div class="admin-filter-search">
+                <i class="bi bi-search" aria-hidden="true"></i>
                 <input id="contact-search" class="form-control"
-                  placeholder="Tìm tên, email hoặc tiêu đề...">
+                  placeholder="Tìm tên, email hoặc tiêu đề..." aria-label="Tìm liên hệ">
               </div>
-              <div class="col-md-4">
-                <select id="contact-status-filter" class="form-select">
+              <div class="admin-filter-select">
+                <select id="contact-status-filter" class="form-select" aria-label="Lọc theo trạng thái">
                   <option value="">Tất cả liên hệ</option>
                   <option value="new">Chưa xử lý</option>
                   <option value="resolved">Đã xử lý</option>
@@ -23,9 +22,9 @@ export default class ContactAdminView extends BaseView {
               </div>
             </div>
 
-            <div class="table-responsive">
-              <table class="table table-hover align-middle">
-                <thead class="table-light">
+            <div class="table-responsive admin-table-wrap">
+              <table class="table table-hover align-middle admin-data-table">
+                <thead>
                   <tr>
                     <th>ID</th>
                     <th>Người gửi</th>
@@ -37,7 +36,7 @@ export default class ContactAdminView extends BaseView {
                   </tr>
                 </thead>
                 <tbody>
-                  ${contacts.map(c => {
+                  ${contacts.length ? contacts.map(c => {
                     const status = c.status || 'new';
 
                     return `
@@ -60,15 +59,13 @@ export default class ContactAdminView extends BaseView {
                         </td>
                       </tr>
                     `;
-                  }).join('')}
+                  }).join('') : '<tr><td colspan="7"><div class="admin-empty-state">Chưa có liên hệ nào.</div></td></tr>'}
                 </tbody>
               </table>
             </div>
-            <p class="text-muted mb-0">Tổng số: ${contacts.length} liên hệ</p>
-          </div>
-        </div>
-      </div>
-    `);
+            <div class="admin-table-footer">Tổng cộng <strong>${contacts.length}</strong> liên hệ</div>
+      `
+    });
   }
 
   formatDate(value) {
