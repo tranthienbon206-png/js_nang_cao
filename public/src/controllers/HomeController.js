@@ -17,39 +17,36 @@ export default class HomeController {
         CategoryModel.getAll(),
         ProductModel.getAll()
       ]);
-      
+
       this.products = products;
 
       // 1. Render khung HTML
       this.view.renderLayout(categories);
 
-      // 2. Phân loại sản phẩm theo categoryId từ db.json
-      const pcProducts = products.filter(p => Number(p.categoryId) === 1);
-      const laptopProducts = products.filter(p => Number(p.categoryId) === 2);
-      const monitorProducts = products.filter(p => Number(p.categoryId) === 10);
+      // 2. Lấy sản phẩm cho từng mục.
+      // Lấy theo categoryId trước, thiếu thì bù bằng sản phẩm khác cho đủ số lượng
+      const pick = (categoryIds, count, offset = 0) => {
+        const own = products.filter(p => categoryIds.includes(Number(p.categoryId)));
+        if (own.length >= count) return own.slice(0, count);
 
-      // 3. Hiển thị từng nhóm (nếu thiếu thì tự động lấy sản phẩm khác làm dự phòng)
-      this.view.renderProductsGroup('pc-list', pcProducts.length ? pcProducts.slice(0, 4) : products.slice(0, 4));
-      this.view.renderProductsGroup('laptop-list', laptopProducts.length ? laptopProducts.slice(0, 4) : products.slice(1, 5));
-      this.view.renderProductsGroup('monitor-list', monitorProducts.length ? monitorProducts.slice(0, 4) : products.slice(2, 6));
+        const rest = products.filter(p => !own.includes(p));
+        const rotated = rest.slice(offset).concat(rest.slice(0, offset));
+        return own.concat(rotated).slice(0, count);
+      };
 
-      // 4. Lắng nghe sự kiện
-      this.view.bindFilter(filters => this.handleFilter(filters));
+      // 3. Hiển thị từng nhóm
+      this.view.renderProductsGroup('pc-list', pick([1], 5, 0));
+      this.view.renderProductsGroup('laptop-list', pick([2], 4, 1));
+      this.view.renderProductsGroup('parts-list', pick([3, 4, 5, 6, 7, 8, 9], 5, 2));
+      this.view.renderProductsGroup('monitor-list', pick([10], 5, 3));
+      this.view.renderProductsGroup('gear-list', pick([11], 5, 4));
+
+      // 4. Slider và sự kiện thêm vào giỏ
+      this.view.bindHero();
       this.view.bindAddToCart(id => this.handleAddToCart(id));
 
     } catch (err) {
       this.view.showError(err.message);
-    }
-  }
-
-  async handleFilter(filters) {
-    try {
-      this.products = await ProductModel.search(filters);
-      if (typeof this.view.renderProducts === 'function') {
-        this.view.renderProducts(this.products);
-      }
-    } catch (err) {
-      alert(err.message);
     }
   }
 
