@@ -717,5 +717,16 @@
   "warranties": [],
   "pcBuilds": [],
   "wishlists": [],
-  "inventoryTransactions": []
+  "inventoryTransactions": [],
+  "contacts": [
+    {
+      "name": "duong",
+      "email": "nxd2k2@gmail.com",
+      "phone": "0333884016",
+      "subject": "Tư vấn mua hàng",
+      "message": "test thu hoat dong chua",
+      "createdAt": "2026-10-21T14:46:59.131Z",
+      "id": 1
+    }
+  ]
 }
