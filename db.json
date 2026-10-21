@@ -207,36 +207,12 @@
   ],
   "products": [
     {
-      "id": 1,
-      "sku": "PC-GZ-001",
-      "name": "GearZone Gaming Starter R5",
-      "slug": "gearzone-gaming-starter-r5",
+      "name": "GearZone Gaming Starter R6",
       "price": 18990000,
-      "originalPrice": 20990000,
       "image": "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=900&q=80",
-      "images": [
-        "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=900&q=80"
-      ],
       "categoryId": 1,
-      "brandId": 4,
-      "brand": "GearZone",
       "description": "PC gaming phổ thông phù hợp chơi game Full HD và học tập, làm việc hằng ngày.",
-      "specs": {
-        "cpu": "AMD Ryzen 5 5600",
-        "gpu": "Radeon Graphics",
-        "ram": "16GB DDR4",
-        "storage": "SSD NVMe 512GB",
-        "psu": "550W 80 Plus",
-        "case": "Mid Tower"
-      },
-      "warrantyMonths": 24,
-      "stock": 8,
-      "sold": 21,
-      "rating": 4.7,
-      "reviewCount": 12,
-      "featured": true,
-      "status": "active",
-      "createdAt": "2026-10-01"
+      "id": 1
     },
     {
       "id": 2,

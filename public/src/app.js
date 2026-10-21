@@ -7,6 +7,8 @@ import CartController from './controllers/CartController.js';
 import AuthController from './controllers/AuthController.js';
 import ProductAdminController from './controllers/admin/ProductAdminController.js';
 import { updateCartBadge, updateAuthMenu } from './controllers/shared.js';
+import { mountHeader } from './views/Header.js';
+import { mountFooter } from './views/Footer.js';
 
 const home = new HomeController();
 const product = new ProductController();
@@ -35,6 +37,10 @@ router
   .add('/admin/products/add', adminOnly(() => productAdmin.add()))
   .add('/admin/products/edit/:id', adminOnly(params => productAdmin.edit(params)))
   .setNotFound(() => { document.getElementById('app').innerHTML = '<h2>404 - Không tìm thấy trang</h2>'; });
+
+
+mountHeader();
+mountFooter();
 
 updateCartBadge();
 updateAuthMenu();
