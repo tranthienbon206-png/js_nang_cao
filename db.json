@@ -1,66 +1,680 @@
 {
+  "settings": {
+    "storeName": "GearZone PC",
+    "currency": "VND",
+    "supportEmail": "support@gearzone.example",
+    "supportPhone": "1900 0000",
+    "shippingFee": 30000,
+    "freeShippingThreshold": 2000000
+  },
   "categories": [
     {
       "id": 1,
-      "name": "Điện thoại"
+      "name": "PC Gaming",
+      "slug": "pc-gaming",
+      "description": "Máy tính chơi game dựng sẵn",
+      "parentId": null,
+      "image": "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=800&q=80",
+      "sortOrder": 1,
+      "active": true
     },
     {
       "id": 2,
-      "name": "Laptop"
+      "name": "Laptop",
+      "slug": "laptop",
+      "description": "Laptop gaming, học tập và văn phòng",
+      "parentId": null,
+      "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80",
+      "sortOrder": 2,
+      "active": true
     },
     {
       "id": 3,
-      "name": "Phụ kiện"
+      "name": "Linh kiện PC",
+      "slug": "linh-kien-pc",
+      "description": "Linh kiện để tự lắp ráp máy tính",
+      "parentId": null,
+      "image": "https://images.unsplash.com/photo-1555617981-dac3880eac6e?auto=format&fit=crop&w=800&q=80",
+      "sortOrder": 3,
+      "active": true
+    },
+    {
+      "id": 4,
+      "name": "CPU - Bộ vi xử lý",
+      "slug": "cpu",
+      "description": "Bộ vi xử lý Intel và AMD",
+      "parentId": 3,
+      "image": "https://images.unsplash.com/photo-1555617981-dac3880eac6e?auto=format&fit=crop&w=800&q=80",
+      "sortOrder": 1,
+      "active": true
+    },
+    {
+      "id": 5,
+      "name": "Mainboard",
+      "slug": "mainboard",
+      "description": "Bo mạch chủ máy tính",
+      "parentId": 3,
+      "image": "https://images.unsplash.com/photo-1555617981-dac3880eac6e?auto=format&fit=crop&w=800&q=80",
+      "sortOrder": 2,
+      "active": true
+    },
+    {
+      "id": 6,
+      "name": "Card đồ họa - VGA",
+      "slug": "vga",
+      "description": "Card đồ họa gaming và đồ họa chuyên nghiệp",
+      "parentId": 3,
+      "image": "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=800&q=80",
+      "sortOrder": 3,
+      "active": true
+    },
+    {
+      "id": 7,
+      "name": "RAM",
+      "slug": "ram",
+      "description": "Bộ nhớ trong DDR4 và DDR5",
+      "parentId": 3,
+      "image": "https://images.unsplash.com/photo-1562976540-1502c214e7c2?auto=format&fit=crop&w=800&q=80",
+      "sortOrder": 4,
+      "active": true
+    },
+    {
+      "id": 8,
+      "name": "Ổ cứng SSD/HDD",
+      "slug": "ssd-hdd",
+      "description": "Lưu trữ tốc độ cao và dung lượng lớn",
+      "parentId": 3,
+      "image": "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=800&q=80",
+      "sortOrder": 5,
+      "active": true
+    },
+    {
+      "id": 9,
+      "name": "Nguồn - PSU",
+      "slug": "psu",
+      "description": "Bộ nguồn máy tính",
+      "parentId": 3,
+      "image": "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=800&q=80",
+      "sortOrder": 6,
+      "active": true
+    },
+    {
+      "id": 10,
+      "name": "Màn hình",
+      "slug": "man-hinh",
+      "description": "Màn hình gaming và văn phòng",
+      "parentId": null,
+      "image": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=800&q=80",
+      "sortOrder": 4,
+      "active": true
+    },
+    {
+      "id": 11,
+      "name": "Gaming Gear & Phụ kiện",
+      "slug": "gaming-gear",
+      "description": "Bàn phím, chuột, tai nghe và phụ kiện",
+      "parentId": null,
+      "image": "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=800&q=80",
+      "sortOrder": 5,
+      "active": true
+    }
+  ],
+  "brands": [
+    {
+      "id": 1,
+      "name": "Intel",
+      "slug": "intel",
+      "logo": "https://logo.clearbit.com/intel.com",
+      "active": true
+    },
+    {
+      "id": 2,
+      "name": "AMD",
+      "slug": "amd",
+      "logo": "https://logo.clearbit.com/amd.com",
+      "active": true
+    },
+    {
+      "id": 3,
+      "name": "NVIDIA",
+      "slug": "nvidia",
+      "logo": "https://logo.clearbit.com/nvidia.com",
+      "active": true
+    },
+    {
+      "id": 4,
+      "name": "ASUS",
+      "slug": "asus",
+      "logo": "https://logo.clearbit.com/asus.com",
+      "active": true
+    },
+    {
+      "id": 5,
+      "name": "MSI",
+      "slug": "msi",
+      "logo": "https://logo.clearbit.com/msi.com",
+      "active": true
+    },
+    {
+      "id": 6,
+      "name": "Gigabyte",
+      "slug": "gigabyte",
+      "logo": "https://logo.clearbit.com/gigabyte.com",
+      "active": true
+    },
+    {
+      "id": 7,
+      "name": "Corsair",
+      "slug": "corsair",
+      "logo": "https://logo.clearbit.com/corsair.com",
+      "active": true
+    },
+    {
+      "id": 8,
+      "name": "Kingston",
+      "slug": "kingston",
+      "logo": "https://logo.clearbit.com/kingston.com",
+      "active": true
+    },
+    {
+      "id": 9,
+      "name": "Samsung",
+      "slug": "samsung",
+      "logo": "https://logo.clearbit.com/samsung.com",
+      "active": true
+    },
+    {
+      "id": 10,
+      "name": "Dell",
+      "slug": "dell",
+      "logo": "https://logo.clearbit.com/dell.com",
+      "active": true
+    },
+    {
+      "id": 11,
+      "name": "Lenovo",
+      "slug": "lenovo",
+      "logo": "https://logo.clearbit.com/lenovo.com",
+      "active": true
+    },
+    {
+      "id": 12,
+      "name": "Logitech",
+      "slug": "logitech",
+      "logo": "https://logo.clearbit.com/logitech.com",
+      "active": true
     }
   ],
   "products": [
     {
       "id": 1,
-      "name": "iPhone 15",
-      "price": 19990000,
-      "image": "https://picsum.photos/seed/p1/400/300",
+      "sku": "PC-GZ-001",
+      "name": "GearZone Gaming Starter R5",
+      "slug": "gearzone-gaming-starter-r5",
+      "price": 18990000,
+      "originalPrice": 20990000,
+      "image": "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=900&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=900&q=80"
+      ],
       "categoryId": 1,
-      "description": "Điện thoại Apple 128GB"
+      "brandId": 4,
+      "brand": "GearZone",
+      "description": "PC gaming phổ thông phù hợp chơi game Full HD và học tập, làm việc hằng ngày.",
+      "specs": {
+        "cpu": "AMD Ryzen 5 5600",
+        "gpu": "Radeon Graphics",
+        "ram": "16GB DDR4",
+        "storage": "SSD NVMe 512GB",
+        "psu": "550W 80 Plus",
+        "case": "Mid Tower"
+      },
+      "warrantyMonths": 24,
+      "stock": 8,
+      "sold": 21,
+      "rating": 4.7,
+      "reviewCount": 12,
+      "featured": true,
+      "status": "active",
+      "createdAt": "2026-10-01"
     },
     {
       "id": 2,
-      "name": "Samsung Galaxy S24",
-      "price": 17490000,
-      "image": "https://picsum.photos/seed/p2/400/300",
-      "categoryId": 1,
-      "description": "Màn hình 6.2 inch"
+      "sku": "LAP-AS-001",
+      "name": "ASUS TUF Gaming F15",
+      "slug": "asus-tuf-gaming-f15",
+      "price": 22990000,
+      "originalPrice": 24990000,
+      "image": "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=900&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=900&q=80"
+      ],
+      "categoryId": 2,
+      "brandId": 4,
+      "brand": "ASUS",
+      "description": "Laptop gaming có hiệu năng tốt cho chơi game, học tập và sáng tạo nội dung.",
+      "specs": {
+        "cpu": "Intel Core i5",
+        "gpu": "NVIDIA GeForce RTX 3050",
+        "ram": "16GB DDR5",
+        "storage": "SSD 512GB",
+        "display": "15.6 inch FHD 144Hz",
+        "os": "Windows 11"
+      },
+      "warrantyMonths": 24,
+      "stock": 5,
+      "sold": 34,
+      "rating": 4.8,
+      "reviewCount": 18,
+      "featured": true,
+      "status": "active",
+      "createdAt": "2026-10-02"
     },
     {
       "id": 3,
-      "name": "MacBook Air M3",
-      "price": 27990000,
-      "image": "https://picsum.photos/seed/p3/400/300",
-      "categoryId": 2,
-      "description": "13 inch, 8GB RAM"
+      "sku": "CPU-AMD-001",
+      "name": "AMD Ryzen 5 5600",
+      "slug": "amd-ryzen-5-5600",
+      "price": 2490000,
+      "originalPrice": 2790000,
+      "image": "https://images.unsplash.com/photo-1555617981-dac3880eac6e?auto=format&fit=crop&w=900&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1555617981-dac3880eac6e?auto=format&fit=crop&w=900&q=80"
+      ],
+      "categoryId": 4,
+      "brandId": 2,
+      "brand": "AMD",
+      "description": "CPU 6 nhân 12 luồng cho máy tính gaming và làm việc.",
+      "specs": {
+        "socket": "AM4",
+        "cores": 6,
+        "threads": 12,
+        "baseClock": "3.5GHz",
+        "boostClock": "4.4GHz",
+        "tdp": "65W",
+        "memoryType": "DDR4"
+      },
+      "warrantyMonths": 36,
+      "stock": 15,
+      "sold": 48,
+      "rating": 4.9,
+      "reviewCount": 26,
+      "featured": true,
+      "status": "active",
+      "createdAt": "2026-09-28"
     },
     {
       "id": 4,
-      "name": "Dell Inspiron 15",
-      "price": 15490000,
-      "image": "https://picsum.photos/seed/p4/400/300",
-      "categoryId": 2,
-      "description": "Core i5, 16GB RAM"
+      "sku": "CPU-INT-001",
+      "name": "Intel Core i5-14400F",
+      "slug": "intel-core-i5-14400f",
+      "price": 4590000,
+      "originalPrice": 4990000,
+      "image": "https://images.unsplash.com/photo-1555617981-dac3880eac6e?auto=format&fit=crop&w=900&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1555617981-dac3880eac6e?auto=format&fit=crop&w=900&q=80"
+      ],
+      "categoryId": 4,
+      "brandId": 1,
+      "brand": "Intel",
+      "description": "CPU Intel thế hệ 14 phù hợp gaming và đa nhiệm.",
+      "specs": {
+        "socket": "LGA1700",
+        "cores": 10,
+        "threads": 16,
+        "baseClock": "2.5GHz",
+        "maxTurbo": "4.7GHz",
+        "tdp": "65W",
+        "memoryType": "DDR4/DDR5 tùy mainboard"
+      },
+      "warrantyMonths": 36,
+      "stock": 9,
+      "sold": 17,
+      "rating": 4.8,
+      "reviewCount": 9,
+      "featured": false,
+      "status": "active",
+      "createdAt": "2026-09-25"
     },
     {
       "id": 5,
-      "name": "Tai nghe Bluetooth",
-      "price": 590000,
-      "image": "https://picsum.photos/seed/p5/400/300",
-      "categoryId": 3,
-      "description": "Chống ồn chủ động"
+      "sku": "MB-MSI-001",
+      "name": "MSI B550M PRO-VDH WIFI",
+      "slug": "msi-b550m-pro-vdh-wifi",
+      "price": 2490000,
+      "originalPrice": 2690000,
+      "image": "https://images.unsplash.com/photo- motherboard?auto=format&fit=crop&w=900&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1555617981-dac3880eac6e?auto=format&fit=crop&w=900&q=80"
+      ],
+      "categoryId": 5,
+      "brandId": 5,
+      "brand": "MSI",
+      "description": "Mainboard mATX cho nền tảng AMD Ryzen socket AM4.",
+      "specs": {
+        "socket": "AM4",
+        "chipset": "B550",
+        "formFactor": "mATX",
+        "memoryType": "DDR4",
+        "memorySlots": 4,
+        "wireless": "Wi-Fi"
+      },
+      "warrantyMonths": 36,
+      "stock": 7,
+      "sold": 13,
+      "rating": 4.7,
+      "reviewCount": 7,
+      "featured": false,
+      "status": "active",
+      "createdAt": "2026-09-24"
     },
     {
       "id": 6,
-      "name": "Sạc nhanh 65W",
-      "price": 450000,
-      "image": "https://picsum.photos/seed/p6/400/300",
-      "categoryId": 3,
-      "description": "Cổng USB-C"
+      "sku": "GPU-AS-001",
+      "name": "ASUS Dual GeForce RTX 4060 8GB",
+      "slug": "asus-dual-rtx-4060-8gb",
+      "price": 7890000,
+      "originalPrice": 8490000,
+      "image": "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=900&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=900&q=80"
+      ],
+      "categoryId": 6,
+      "brandId": 4,
+      "brand": "ASUS",
+      "description": "Card đồ họa 8GB cho gaming Full HD và ứng dụng đồ họa.",
+      "specs": {
+        "chipset": "NVIDIA GeForce RTX 4060",
+        "vram": "8GB GDDR6",
+        "interface": "PCIe 4.0",
+        "recommendedPsu": "550W",
+        "rayTracing": true
+      },
+      "warrantyMonths": 36,
+      "stock": 6,
+      "sold": 29,
+      "rating": 4.9,
+      "reviewCount": 15,
+      "featured": true,
+      "status": "active",
+      "createdAt": "2026-09-23"
+    },
+    {
+      "id": 7,
+      "sku": "RAM-KIN-001",
+      "name": "Kingston Fury Beast 16GB DDR4 3200",
+      "slug": "kingston-fury-beast-16gb-ddr4-3200",
+      "price": 890000,
+      "originalPrice": 1090000,
+      "image": "https://images.unsplash.com/photo-1562976540-1502c214e7c2?auto=format&fit=crop&w=900&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1562976540-1502c214e7c2?auto=format&fit=crop&w=900&q=80"
+      ],
+      "categoryId": 7,
+      "brandId": 8,
+      "brand": "Kingston",
+      "description": "RAM DDR4 dung lượng 16GB cho máy tính cá nhân.",
+      "specs": {
+        "capacity": "16GB",
+        "type": "DDR4",
+        "speed": "3200MHz",
+        "kit": "1 x 16GB",
+        "latency": "CL16"
+      },
+      "warrantyMonths": 36,
+      "stock": 24,
+      "sold": 61,
+      "rating": 4.8,
+      "reviewCount": 31,
+      "featured": true,
+      "status": "active",
+      "createdAt": "2026-09-20"
+    },
+    {
+      "id": 8,
+      "sku": "SSD-SAM-001",
+      "name": "Samsung 990 EVO NVMe 1TB",
+      "slug": "samsung-990-evo-nvme-1tb",
+      "price": 2190000,
+      "originalPrice": 2490000,
+      "image": "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=900&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=900&q=80"
+      ],
+      "categoryId": 8,
+      "brandId": 9,
+      "brand": "Samsung",
+      "description": "SSD NVMe 1TB nâng cấp tốc độ khởi động và tải ứng dụng.",
+      "specs": {
+        "capacity": "1TB",
+        "interface": "M.2 NVMe",
+        "formFactor": "M.2 2280",
+        "readSpeed": "Tùy cấu hình và điều kiện sử dụng",
+        "technology": "V-NAND"
+      },
+      "warrantyMonths": 60,
+      "stock": 11,
+      "sold": 37,
+      "rating": 4.9,
+      "reviewCount": 22,
+      "featured": false,
+      "status": "active",
+      "createdAt": "2026-09-18"
+    },
+    {
+      "id": 9,
+      "sku": "PSU-COR-001",
+      "name": "Corsair CV650 650W 80 Plus Bronze",
+      "slug": "corsair-cv650-650w",
+      "price": 1390000,
+      "originalPrice": 1590000,
+      "image": "https://images.unsplash.com/photo-158?auto=format&fit=crop&w=900&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-158?auto=format&fit=crop&w=900&q=80"
+      ],
+      "categoryId": 9,
+      "brandId": 7,
+      "brand": "Corsair",
+      "description": "Bộ nguồn 650W dành cho cấu hình máy tính phổ thông và gaming.",
+      "specs": {
+        "wattage": "650W",
+        "efficiency": "80 Plus Bronze",
+        "modular": "Non-modular",
+        "formFactor": "ATX"
+      },
+      "warrantyMonths": 36,
+      "stock": 10,
+      "sold": 19,
+      "rating": 4.6,
+      "reviewCount": 8,
+      "featured": false,
+      "status": "active",
+      "createdAt": "2026-09-17"
+    },
+    {
+      "id": 10,
+      "sku": "MON-AS-001",
+      "name": "ASUS TUF Gaming 24 inch 165Hz",
+      "slug": "asus-tuf-gaming-24-165hz",
+      "price": 3290000,
+      "originalPrice": 3690000,
+      "image": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=900&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=900&q=80"
+      ],
+      "categoryId": 10,
+      "brandId": 4,
+      "brand": "ASUS",
+      "description": "Màn hình gaming tần số quét cao, phù hợp chơi game cạnh tranh.",
+      "specs": {
+        "size": "24 inch",
+        "resolution": "Full HD",
+        "refreshRate": "165Hz",
+        "panel": "IPS tùy phiên bản",
+        "sync": "Adaptive Sync"
+      },
+      "warrantyMonths": 36,
+      "stock": 8,
+      "sold": 16,
+      "rating": 4.7,
+      "reviewCount": 11,
+      "featured": true,
+      "status": "active",
+      "createdAt": "2026-09-15"
+    },
+    {
+      "id": 11,
+      "sku": "KB-LOG-001",
+      "name": "Logitech G213 Gaming Keyboard",
+      "slug": "logitech-g213-gaming-keyboard",
+      "price": 990000,
+      "originalPrice": 1190000,
+      "image": "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=900&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=900&q=80"
+      ],
+      "categoryId": 11,
+      "brandId": 12,
+      "brand": "Logitech",
+      "description": "Bàn phím gaming có đèn nền, phục vụ chơi game và làm việc.",
+      "specs": {
+        "connection": "USB có dây",
+        "layout": "Full-size",
+        "lighting": "RGB",
+        "spillResistance": true
+      },
+      "warrantyMonths": 24,
+      "stock": 13,
+      "sold": 25,
+      "rating": 4.6,
+      "reviewCount": 14,
+      "featured": false,
+      "status": "active",
+      "createdAt": "2026-09-12"
+    },
+    {
+      "id": 12,
+      "sku": "LAP-DE-001",
+      "name": "Dell Inspiron 15",
+      "slug": "dell-inspiron-15",
+      "price": 15990000,
+      "originalPrice": 16990000,
+      "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=900&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=900&q=80"
+      ],
+      "categoryId": 2,
+      "brandId": 10,
+      "brand": "Dell",
+      "description": "Laptop phục vụ học tập, văn phòng và nhu cầu sử dụng hằng ngày.",
+      "specs": {
+        "cpu": "Intel Core i5",
+        "gpu": "Đồ họa tích hợp",
+        "ram": "16GB",
+        "storage": "SSD 512GB",
+        "display": "15.6 inch FHD",
+        "os": "Tùy phiên bản"
+      },
+      "warrantyMonths": 24,
+      "stock": 4,
+      "sold": 20,
+      "rating": 4.5,
+      "reviewCount": 10,
+      "featured": false,
+      "status": "active",
+      "createdAt": "2026-09-10"
+    },
+    {
+      "id": 13,
+      "sku": "RAM-COR-001",
+      "name": "Corsair Vengeance 32GB DDR5",
+      "slug": "corsair-vengeance-32gb-ddr5",
+      "price": 2390000,
+      "originalPrice": 2690000,
+      "image": "https://images.unsplash.com/photo-1562976540-1502c214e7c2?auto=format&fit=crop&w=900&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1562976540-1502c214e7c2?auto=format&fit=crop&w=900&q=80"
+      ],
+      "categoryId": 7,
+      "brandId": 7,
+      "brand": "Corsair",
+      "description": "Bộ RAM DDR5 32GB cho hệ thống tương thích DDR5.",
+      "specs": {
+        "capacity": "32GB",
+        "type": "DDR5",
+        "speed": "Tùy mã sản phẩm",
+        "kit": "2 x 16GB",
+        "compatibility": "Mainboard hỗ trợ DDR5"
+      },
+      "warrantyMonths": 36,
+      "stock": 7,
+      "sold": 12,
+      "rating": 4.8,
+      "reviewCount": 6,
+      "featured": false,
+      "status": "active",
+      "createdAt": "2026-09-08"
+    },
+    {
+      "id": 14,
+      "sku": "GPU-GIG-001",
+      "name": "Gigabyte GeForce RTX 4070 SUPER 12GB",
+      "slug": "gigabyte-rtx-4070-super-12gb",
+      "price": 17990000,
+      "originalPrice": 18990000,
+      "image": "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=900&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=900&q=80"
+      ],
+      "categoryId": 6,
+      "brandId": 6,
+      "brand": "Gigabyte",
+      "description": "Card đồ họa hiệu năng cao cho gaming độ phân giải cao và sáng tạo nội dung.",
+      "specs": {
+        "chipset": "NVIDIA GeForce RTX 4070 SUPER",
+        "vram": "12GB GDDR6X",
+        "interface": "PCIe 4.0",
+        "recommendedPsu": "750W",
+        "rayTracing": true
+      },
+      "warrantyMonths": 36,
+      "stock": 3,
+      "sold": 9,
+      "rating": 4.9,
+      "reviewCount": 5,
+      "featured": true,
+      "status": "active",
+      "createdAt": "2026-09-05"
+    },
+    {
+      "id": 15,
+      "sku": "SSD-KIN-001",
+      "name": "Kingston NV2 NVMe 1TB",
+      "slug": "kingston-nv2-nvme-1tb",
+      "price": 1690000,
+      "originalPrice": 1890000,
+      "image": "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=900&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=900&q=80"
+      ],
+      "categoryId": 8,
+      "brandId": 8,
+      "brand": "Kingston",
+      "description": "SSD M.2 NVMe 1TB dành cho nâng cấp lưu trữ máy tính.",
+      "specs": {
+        "capacity": "1TB",
+        "interface": "M.2 NVMe PCIe 4.0",
+        "formFactor": "M.2 2280",
+        "warranty": "Theo chính sách nhà phân phối"
+      },
+      "warrantyMonths": 36,
+      "stock": 18,
+      "sold": 33,
+      "rating": 4.7,
+      "reviewCount": 16,
+      "featured": false,
+      "status": "active",
+      "createdAt": "2026-09-01"
     }
   ],
   "users": [
@@ -69,15 +683,63 @@
       "username": "admin",
       "password": "123456",
       "fullname": "Quản trị viên",
-      "role": "admin"
+      "email": "admin@gearzone.example",
+      "phone": "",
+      "avatar": "",
+      "role": "admin",
+      "status": "active",
+      "createdAt": "2026-09-01"
     },
     {
       "id": 2,
       "username": "user",
       "password": "123456",
-      "fullname": "Khách hàng",
-      "role": "user"
+      "fullname": "Khách hàng mẫu",
+      "email": "user@gearzone.example",
+      "phone": "",
+      "avatar": "",
+      "role": "user",
+      "status": "active",
+      "createdAt": "2026-09-01"
     }
   ],
-  "orders": []
+  "carts": [],
+  "orders": [],
+  "orderItems": [],
+  "reviews": [],
+  "coupons": [
+    {
+      "id": 1,
+      "code": "GEARZONE10",
+      "name": "Giảm 10% cho đơn hàng",
+      "type": "percent",
+      "value": 10,
+      "minOrderValue": 1000000,
+      "maxDiscount": 500000,
+      "usageLimit": 100,
+      "usedCount": 0,
+      "startsAt": "2026-10-01",
+      "endsAt": "2026-12-31",
+      "active": true
+    },
+    {
+      "id": 2,
+      "code": "FREESHIP",
+      "name": "Miễn phí vận chuyển",
+      "type": "shipping",
+      "value": 30000,
+      "minOrderValue": 500000,
+      "maxDiscount": 30000,
+      "usageLimit": 200,
+      "usedCount": 0,
+      "startsAt": "2026-10-01",
+      "endsAt": "2026-12-31",
+      "active": true
+    }
+  ],
+  "payments": [],
+  "warranties": [],
+  "pcBuilds": [],
+  "wishlists": [],
+  "inventoryTransactions": []
 }
