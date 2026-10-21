@@ -1,0 +1,83 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Điện thoại"
+    },
+    {
+      "id": 2,
+      "name": "Laptop"
+    },
+    {
+      "id": 3,
+      "name": "Phụ kiện"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "iPhone 15",
+      "price": 19990000,
+      "image": "https://picsum.photos/seed/p1/400/300",
+      "categoryId": 1,
+      "description": "Điện thoại Apple 128GB"
+    },
+    {
+      "id": 2,
+      "name": "Samsung Galaxy S24",
+      "price": 17490000,
+      "image": "https://picsum.photos/seed/p2/400/300",
+      "categoryId": 1,
+      "description": "Màn hình 6.2 inch"
+    },
+    {
+      "id": 3,
+      "name": "MacBook Air M3",
+      "price": 27990000,
+      "image": "https://picsum.photos/seed/p3/400/300",
+      "categoryId": 2,
+      "description": "13 inch, 8GB RAM"
+    },
+    {
+      "id": 4,
+      "name": "Dell Inspiron 15",
+      "price": 15490000,
+      "image": "https://picsum.photos/seed/p4/400/300",
+      "categoryId": 2,
+      "description": "Core i5, 16GB RAM"
+    },
+    {
+      "id": 5,
+      "name": "Tai nghe Bluetooth",
+      "price": 590000,
+      "image": "https://picsum.photos/seed/p5/400/300",
+      "categoryId": 3,
+      "description": "Chống ồn chủ động"
+    },
+    {
+      "id": 6,
+      "name": "Sạc nhanh 65W",
+      "price": 450000,
+      "image": "https://picsum.photos/seed/p6/400/300",
+      "categoryId": 3,
+      "description": "Cổng USB-C"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "123456",
+      "fullname": "Quản trị viên",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "username": "user",
+      "password": "123456",
+      "fullname": "Khách hàng",
+      "role": "user"
+    }
+  ],
+  "orders": []
+}
