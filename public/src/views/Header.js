@@ -1,3 +1,7 @@
+import { escapeHtml } from '../utils/helpers.js';
+
+const API = 'http://localhost:3000';   // đổi cho đúng cổng json-server của bạn
+
 export function Header() {
   return `
     <!-- Top bar -->
@@ -11,9 +15,7 @@ export function Header() {
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
       <div class="container">
-        <a class="navbar-brand fw-bold text-primary" href="#/">
-        TTD Shop
-        </a>
+        <a class="navbar-brand fw-bold text-primary" href="#/">TTD Shop</a>
 
         <button class="navbar-toggler" type="button"
                 data-bs-toggle="collapse" data-bs-target="#mainNav"
@@ -26,16 +28,11 @@ export function Header() {
             <li class="nav-item"><a class="nav-link" href="#/">Trang chủ</a></li>
             <li class="nav-item"><a class="nav-link" href="#/products">Sản phẩm</a></li>
 
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button"
-                 data-bs-toggle="dropdown" aria-expanded="false">Danh mục</a>
-              <ul class="dropdown-menu border-0 shadow">
-                <li><a class="dropdown-item" href="#/products?category=laptop">Laptop</a></li>
-                <li><a class="dropdown-item" href="#/products?category=pc">PC Gaming</a></li>
-                <li><a class="dropdown-item" href="#/products?category=linh-kien">Linh kiện</a></li>
-                <li><a class="dropdown-item" href="#/products?category=man-hinh">Màn hình</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#/products?category=phu-kien">Phụ kiện</a></li>
+            <li class="nav-item dropdown" id="category-dropdown">
+              <button class="nav-link dropdown-toggle bg-transparent border-0" type="button"
+                      data-bs-toggle="dropdown" aria-expanded="false">Danh mục</button>
+              <ul class="dropdown-menu border-0 shadow" id="category-menu">
+                <li><span class="dropdown-item text-muted">Đang tải...</span></li>
               </ul>
             </li>
 
@@ -67,12 +64,46 @@ export function Header() {
   `;
 }
 
+/* Đánh dấu mục menu đang active theo hash */
 function setActiveLink() {
   const current = location.hash.split('?')[0] || '#/';
-  document.querySelectorAll('#mainNav .nav-link[href]').forEach((a) => {
-    const href = a.getAttribute('href');
-    a.classList.toggle('active', href === current);
+  const inCategory = current.startsWith('#/category/');
+
+  // Các link thường
+  document.querySelectorAll('#mainNav .navbar-nav > .nav-item > a.nav-link').forEach((a) => {
+    a.classList.toggle('active', a.getAttribute('href') === current);
   });
+
+  // Mục "Danh mục" và mục con
+  document.querySelector('#category-dropdown > .nav-link')?.classList.toggle('active', inCategory);
+  document.querySelectorAll('#category-menu .dropdown-item').forEach((a) => {
+    a.classList.toggle('active', a.getAttribute('href') === current);
+  });
+
+  // Đóng menu hamburger trên mobile sau khi chuyển trang
+  const nav = document.querySelector('#mainNav');
+  if (nav?.classList.contains('show')) {
+    window.bootstrap?.Collapse.getOrCreateInstance(nav).hide();
+  }
+}
+
+/* Lấy danh mục từ db.json */
+async function loadCategoryMenu() {
+  const menu = document.querySelector('#category-menu');
+  if (!menu) return;
+  try {
+    const res = await fetch(`${API}/categories`);
+    if (!res.ok) throw new Error();
+    const cats = await res.json();
+
+    menu.innerHTML = cats.length
+      ? cats.map((c) => `
+          <li><a class="dropdown-item" href="#/category/${c.id}">${escapeHtml(c.name)}</a></li>`).join('')
+      : '<li><span class="dropdown-item text-muted">Chưa có danh mục</span></li>';
+  } catch {
+    menu.innerHTML = '<li><span class="dropdown-item text-muted">Không tải được danh mục</span></li>';
+  }
+  setActiveLink();   // gọi lại để tô sáng mục con vừa render
 }
 
 function bindSearch() {
@@ -84,11 +115,19 @@ function bindSearch() {
   });
 }
 
+let hashBound = false;
+
 export function mountHeader(selector = '#header') {
   const el = document.querySelector(selector);
   if (!el) return;
+
   el.innerHTML = Header();
   bindSearch();
   setActiveLink();
-  window.addEventListener('hashchange', setActiveLink);
+  loadCategoryMenu();
+
+  if (!hashBound) {
+    window.addEventListener('hashchange', setActiveLink);
+    hashBound = true;
+  }
 }
