@@ -44,6 +44,7 @@ const router = new Router();
 router
   .add('/', () => home.index())
   .add('/product/:id', params => product.detail(params))
+  .add('/product', () => product.index())
   .add('/cart', () => cart.index())
   .add('/login', () => auth.login())
   .add('/register', () => auth.register())
