@@ -1,0 +1,12 @@
+{
+  "name": "js-mvc-shop",
+  "version": "1.0.0",
+  "description": "Assignment JavaScript nâng cao - Web bán hàng theo mô hình MVC (ES6 Module + Fetch API + json-server)",
+  "private": true,
+  "scripts": {
+    "start": "json-server --watch db.json --port 3000 --static ./public"
+  },
+  "devDependencies": {
+    "json-server": "0.17.4"
+  }
+}
