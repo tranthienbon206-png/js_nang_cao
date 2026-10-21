@@ -10,6 +10,7 @@ import { updateCartBadge, updateAuthMenu } from './controllers/shared.js';
 import { mountHeader } from './views/Header.js';
 import { mountFooter } from './views/Footer.js';
 import AboutController from './controllers/AboutController.js';
+import ContactController from './controllers/ContactController.js';
 
 const home = new HomeController();
 const product = new ProductController();
@@ -17,6 +18,7 @@ const cart = new CartController();
 const auth = new AuthController();
 const productAdmin = new ProductAdminController();
 const about = new AboutController();
+const contact = new ContactController();
 
 // Middleware đơn giản: chặn trang admin nếu không phải admin
 const adminOnly = action => params => {
@@ -36,6 +38,7 @@ router
   .add('/register', () => auth.register())
   .add('/logout', () => auth.logout())
   .add('/about',()=>about.index())
+  .add('/contact', () => contact.index())
   .add('/admin/products', adminOnly(() => productAdmin.index()))
   .add('/admin/products/add', adminOnly(() => productAdmin.add()))
   .add('/admin/products/edit/:id', adminOnly(params => productAdmin.edit(params)))
