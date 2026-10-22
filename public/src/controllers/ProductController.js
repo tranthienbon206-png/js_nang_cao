@@ -44,22 +44,27 @@ export default class ProductController {
     CartModel.add(product);
     updateCartBadge();
     alert(`Đã thêm "${product.name}" vào giỏ`);
+    this.view = new ProductDetailView();
   }
 
   async detail({ id }) {
-    try {
-      this.detailView.showLoading();
+
+    this.detailView.showLoading();
+    const product = await ProductModel.getById(id);
+    const category = await CategoryModel.getById(product.categoryId).catch(() => null);
+
+    this.detailView.render(product, category?.name);
+    this.detailView.bindAddToCart(async qty => {
+      this.view.showLoading();
       const product = await ProductModel.getById(id);
       const category = await CategoryModel.getById(product.categoryId).catch(() => null);
 
-      this.detailView.render(product, category?.name);
-      this.detailView.bindAddToCart(qty => {
+      this.view.render(product, category?.name);
+      this.view.bindAddToCart(qty => {
         CartModel.add(product, qty);
         updateCartBadge();
         alert('Đã thêm vào giỏ hàng');
       });
-    } catch {
-      this.detailView.showError('Không tìm thấy sản phẩm');
-    }
+    })
   }
 }

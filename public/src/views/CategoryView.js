@@ -18,6 +18,20 @@ export default class CategoryView extends BaseView {
 
       <!-- Vùng hiển thị lưới sản phẩm -->
       <div id="cat-products" class="row g-4 mb-5"></div>
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+        <div>
+          <h1 class="h3 fw-bold mb-1">${escapeHtml(category.name)}</h1>
+          <span id="cat-count" class="text-muted small">${products.length} sản phẩm</span>
+        </div>
+        <select id="cat-sort" class="form-select w-auto shadow-sm">
+          <option value="">Sắp xếp</option>
+          <option value="asc">Giá tăng dần</option>
+          <option value="desc">Giá giảm dần</option>
+          <option value="name">Tên A → Z</option>
+        </select>
+      </div>
+
+      <div id="cat-products" class="row g-4"></div>
     `);
 
     this.renderProducts(products);
@@ -36,6 +50,10 @@ export default class CategoryView extends BaseView {
             <a href="#/" class="btn btn-primary px-4 py-2 rounded-pill shadow-sm">
               <i class="bi bi-house-door me-2"></i>Về trang chủ
             </a>
+          <div class="bg-white rounded-3 shadow-sm text-center py-5">
+            <i class="bi bi-inbox display-4 d-block mb-2 text-muted"></i>
+            <p class="text-muted mb-3">Chưa có sản phẩm nào trong danh mục này.</p>
+            <a href="#/" class="btn btn-primary btn-sm">Về trang chủ</a>
           </div>
         </div>`;
       return;
@@ -47,6 +65,9 @@ export default class CategoryView extends BaseView {
           <a href="#/product/${p.id}" class="overflow-hidden d-block position-relative">
             <img src="${p.image}" alt="${escapeHtml(p.name)}" class="card-img-top" loading="lazy">
             <span class="position-absolute top-0 start-0 m-2 badge bg-primary bg-opacity-75">Danh mục</span>
+          <a href="#/product/${p.id}" class="overflow-hidden d-block">
+            <img src="${p.image}" alt="${escapeHtml(p.name)}"
+                 class="card-img-top" loading="lazy">
           </a>
           <div class="card-body d-flex flex-column">
             <h2 class="h6 card-title product-title mb-2">
@@ -58,6 +79,10 @@ export default class CategoryView extends BaseView {
                 <i class="bi bi-eye me-1"></i>Chi tiết
               </a>
             </div>
+            <div class="fw-bold text-danger fs-5 mb-3">${formatPrice(p.price)}</div>
+            <a href="#/product/${p.id}" class="btn btn-primary btn-sm mt-auto">
+              <i class="bi bi-eye me-1"></i>Xem chi tiết
+            </a>
           </div>
         </div>
       </div>`).join('');
