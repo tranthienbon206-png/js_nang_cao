@@ -20,28 +20,32 @@ export default class HomeController {
 
       this.products = products;
 
+      // Lấy id của danh mục (theo slug) kèm toàn bộ danh mục con
+      const idsOf = slug => {
+        const root = categories.find(c => c.slug === slug);
+        if (!root) return [];
+        const kids = categories
+          .filter(c => Number(c.parentId) === Number(root.id))
+          .map(c => Number(c.id));
+        return [Number(root.id), ...kids];
+      };
+
+      // Lấy tối đa "count" sản phẩm thuộc các danh mục, bán chạy trước
+      const top = (ids, count) => products
+        .filter(p => ids.includes(Number(p.categoryId)))
+        .sort((a, b) => (b.sold || 0) - (a.sold || 0))
+        .slice(0, count);
+
       // 1. Render khung HTML
       this.view.renderLayout(categories);
 
-      // 2. Lấy sản phẩm cho từng mục.
-      // Lấy theo categoryId trước, thiếu thì bù bằng sản phẩm khác cho đủ số lượng
-      const pick = (categoryIds, count, offset = 0) => {
-        const own = products.filter(p => categoryIds.includes(Number(p.categoryId)));
-        if (own.length >= count) return own.slice(0, count);
+      // 2. Hiển thị từng nhóm, đúng danh mục, không lẫn sản phẩm khác
+      this.view.renderProductsGroup('pc-laptop-list', top([...idsOf('pc-gaming'), ...idsOf('laptop')], 5));
+      this.view.renderProductsGroup('parts-list', top(idsOf('linh-kien-pc'), 5));
+      this.view.renderProductsGroup('monitor-gear-list', top([...idsOf('man-hinh'), ...idsOf('gaming-gear')], 5));
+      this.view.renderProductsGroup('best-list', [...products].sort((a, b) => (b.sold || 0) - (a.sold || 0)).slice(0, 5));
 
-        const rest = products.filter(p => !own.includes(p));
-        const rotated = rest.slice(offset).concat(rest.slice(0, offset));
-        return own.concat(rotated).slice(0, count);
-      };
-
-      // 3. Hiển thị từng nhóm
-      this.view.renderProductsGroup('pc-list', pick([1], 5, 0));
-      this.view.renderProductsGroup('laptop-list', pick([2], 4, 1));
-      this.view.renderProductsGroup('parts-list', pick([3, 4, 5, 6, 7, 8, 9], 5, 2));
-      this.view.renderProductsGroup('monitor-list', pick([10], 5, 3));
-      this.view.renderProductsGroup('gear-list', pick([11], 5, 4));
-
-      // 4. Slider và sự kiện thêm vào giỏ
+      // 3. Slider và sự kiện thêm vào giỏ
       this.view.bindHero();
       this.view.bindAddToCart(id => this.handleAddToCart(id));
 
