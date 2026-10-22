@@ -207,9 +207,479 @@
   ],
   "products": [
     {
+      "id": 16,
+      "sku": "PC-GZ-002",
+      "name": "GearZone Gaming R5 7500F RTX 4060",
+      "slug": "gearzone-gaming-r5-7500f-rtx-4060",
+      "price": 21990000,
+      "originalPrice": 23990000,
+      "image": "/public/images/1.jpg",
+      "images": [
+        "/public/images/1.jpg"
+      ],
+      "categoryId": 1,
+      "brandId": 4,
+      "brand": "GearZone",
+      "description": "PC gaming tầm trung chơi mượt game eSports và game AAA ở độ phân giải Full HD.",
+      "specs": {
+        "cpu": "AMD Ryzen 5 7500F",
+        "gpu": "RTX 4060 8GB",
+        "ram": "16GB DDR5",
+        "storage": "SSD NVMe 512GB",
+        "psu": "650W 80 Plus",
+        "case": "Mid Tower"
+      },
+      "warrantyMonths": 24,
+      "stock": 10,
+      "sold": 28,
+      "rating": 4.8,
+      "reviewCount": 14,
+      "featured": true,
+      "status": "active",
+      "createdAt": "2026-10-05"
+    },
+    {
+      "id": 17,
+      "sku": "PC-GZ-003",
+      "name": "GearZone Gaming i7 RTX 4070 SUPER",
+      "slug": "gearzone-gaming-i7-rtx-4070-super",
+      "price": 38990000,
+      "originalPrice": 41990000,
+      "image": "/public/images/2.jpg",
+      "images": [
+        "/public/images/2.jpg"
+      ],
+      "categoryId": 1,
+      "brandId": 4,
+      "brand": "GearZone",
+      "description": "PC gaming cao cấp cho game 2K, livestream và sáng tạo nội dung.",
+      "specs": {
+        "cpu": "Intel Core i7-14700F",
+        "gpu": "RTX 4070 SUPER 12GB",
+        "ram": "32GB DDR5",
+        "storage": "SSD NVMe 1TB",
+        "psu": "750W 80 Plus Gold",
+        "case": "Mid Tower kính cường lực"
+      },
+      "warrantyMonths": 24,
+      "stock": 4,
+      "sold": 11,
+      "rating": 4.9,
+      "reviewCount": 6,
+      "featured": true,
+      "status": "active",
+      "createdAt": "2026-10-06"
+    },
+    {
+      "id": 18,
+      "sku": "LAP-LE-001",
+      "name": "Lenovo LOQ 15 RTX 4050",
+      "slug": "lenovo-loq-15-rtx-4050",
+      "price": 24990000,
+      "originalPrice": 26990000,
+      "image": "/public/images/3.jpg.webp",
+      "images": [
+        "/public/images/3.jpg.webp"
+      ],
+      "categoryId": 2,
+      "brandId": 11,
+      "brand": "Lenovo",
+      "description": "Laptop gaming mỏng nhẹ, tản nhiệt tốt, phù hợp sinh viên và game thủ.",
+      "specs": {
+        "cpu": "Intel Core i5",
+        "gpu": "RTX 4050 6GB",
+        "ram": "16GB DDR5",
+        "storage": "SSD 512GB",
+        "display": "15.6 inch FHD 144Hz",
+        "os": "Windows 11"
+      },
+      "warrantyMonths": 24,
+      "stock": 6,
+      "sold": 22,
+      "rating": 4.7,
+      "reviewCount": 12,
+      "featured": true,
+      "status": "active",
+      "createdAt": "2026-10-07"
+    },
+    {
+      "id": 19,
+      "sku": "LAP-MS-001",
+      "name": "MSI Thin 15 RTX 3050",
+      "slug": "msi-thin-15-rtx-3050",
+      "price": 19990000,
+      "originalPrice": 21990000,
+      "image": "/public/images/MSI Thin 15 RTX 3050.jpg",
+      "images": [
+        "/public/images/MSI Thin 15 RTX 3050.jpg"
+      ],
+      "categoryId": 2,
+      "brandId": 5,
+      "brand": "MSI",
+      "description": "Laptop gaming giá tốt, đủ mạnh cho game Full HD và đồ họa cơ bản.",
+      "specs": {
+        "cpu": "Intel Core i5",
+        "gpu": "RTX 3050 4GB",
+        "ram": "16GB DDR4",
+        "storage": "SSD 512GB",
+        "display": "15.6 inch FHD 144Hz",
+        "os": "Windows 11"
+      },
+      "warrantyMonths": 24,
+      "stock": 9,
+      "sold": 31,
+      "rating": 4.6,
+      "reviewCount": 17,
+      "featured": false,
+      "status": "active",
+      "createdAt": "2026-10-08"
+    },
+    {
+      "id": 20,
+      "sku": "CPU-INT-002",
+      "name": "Intel Core i7-14700F",
+      "slug": "intel-core-i7-14700f",
+      "price": 8990000,
+      "originalPrice": 9690000,
+      "image": "/public/images/Intel Core i7-14700F.jpg",
+      "images": [
+        "/public/images/Intel Core i7-14700F.jpg"
+      ],
+      "categoryId": 4,
+      "brandId": 1,
+      "brand": "Intel",
+      "description": "CPU 20 nhân 28 luồng cho gaming, livestream và làm việc đa nhiệm nặng.",
+      "specs": {
+        "socket": "LGA1700",
+        "cores": 20,
+        "threads": 28,
+        "baseClock": "2.1GHz",
+        "maxTurbo": "5.4GHz",
+        "tdp": "65W",
+        "memoryType": "DDR4/DDR5 tùy mainboard"
+      },
+      "warrantyMonths": 36,
+      "stock": 8,
+      "sold": 19,
+      "rating": 4.9,
+      "reviewCount": 10,
+      "featured": true,
+      "status": "active",
+      "createdAt": "2026-10-09"
+    },
+    {
+      "id": 21,
+      "sku": "CPU-AMD-002",
+      "name": "AMD Ryzen 7 7800X3D",
+      "slug": "amd-ryzen-7-7800x3d",
+      "price": 10490000,
+      "originalPrice": 11490000,
+      "image": "/public/images/AMD Ryzen 7 7800X3D.jpg",
+      "images": [
+        "/public/images/AMD Ryzen 7 7800X3D.jpg"
+      ],
+      "categoryId": 4,
+      "brandId": 2,
+      "brand": "AMD",
+      "description": "CPU gaming hàng đầu với bộ nhớ đệm 3D V-Cache cho tốc độ khung hình cao.",
+      "specs": {
+        "socket": "AM5",
+        "cores": 8,
+        "threads": 16,
+        "baseClock": "4.2GHz",
+        "boostClock": "5.0GHz",
+        "tdp": "120W",
+        "memoryType": "DDR5"
+      },
+      "warrantyMonths": 36,
+      "stock": 5,
+      "sold": 24,
+      "rating": 4.9,
+      "reviewCount": 13,
+      "featured": true,
+      "status": "active",
+      "createdAt": "2026-10-09"
+    },
+    {
+      "id": 22,
+      "sku": "MB-GIG-001",
+      "name": "Gigabyte B760M DS3H DDR4",
+      "slug": "gigabyte-b760m-ds3h-ddr4",
+      "price": 2790000,
+      "originalPrice": 2990000,
+      "image": "/public/images/Gigabyte B760M DS3H DDR4.jpg",
+      "images": [
+        "/public/images/Gigabyte B760M DS3H DDR4.jpg"
+      ],
+      "categoryId": 5,
+      "brandId": 6,
+      "brand": "Gigabyte",
+      "description": "Mainboard mATX socket LGA1700, phù hợp CPU Intel thế hệ 12, 13 và 14.",
+      "specs": {
+        "socket": "LGA1700",
+        "chipset": "B760",
+        "formFactor": "mATX",
+        "memoryType": "DDR4",
+        "memorySlots": 4,
+        "wireless": "Không"
+      },
+      "warrantyMonths": 36,
+      "stock": 12,
+      "sold": 21,
+      "rating": 4.6,
+      "reviewCount": 9,
+      "featured": false,
+      "status": "active",
+      "createdAt": "2026-10-10"
+    },
+    {
+      "id": 23,
+      "sku": "GPU-MSI-001",
+      "name": "MSI GeForce RTX 4060 Ti 8GB",
+      "slug": "msi-geforce-rtx-4060-ti-8gb",
+      "price": 10990000,
+      "originalPrice": 11990000,
+      "image": "/public/images/MSI GeForce RTX 4060 Ti 8GB.jpg",
+      "images": [
+        "/public/images/MSI GeForce RTX 4060 Ti 8GB.jpg"
+      ],
+      "categoryId": 6,
+      "brandId": 5,
+      "brand": "MSI",
+      "description": "Card đồ họa mạnh cho gaming 1440p, hỗ trợ DLSS 3 và ray tracing.",
+      "specs": {
+        "chipset": "RTX 4060 Ti",
+        "vram": "8GB GDDR6",
+        "interface": "PCIe 4.0",
+        "recommendedPsu": "550W",
+        "rayTracing": true
+      },
+      "warrantyMonths": 36,
+      "stock": 5,
+      "sold": 15,
+      "rating": 4.8,
+      "reviewCount": 8,
+      "featured": false,
+      "status": "active",
+      "createdAt": "2026-10-10"
+    },
+    {
+      "id": 24,
+      "sku": "RAM-COR-002",
+      "name": "Corsair Vengeance 16GB DDR4 3200",
+      "slug": "corsair-vengeance-16gb-ddr4-3200",
+      "price": 850000,
+      "originalPrice": 990000,
+      "image": "/public/images/Corsair Vengeance 16GB DDR4 3200.jpg",
+      "images": [
+        "/public/images/Corsair Vengeance 16GB DDR4 3200.jpg"
+      ],
+      "categoryId": 7,
+      "brandId": 7,
+      "brand": "Corsair",
+      "description": "RAM DDR4 16GB tản nhiệt nhôm, ổn định cho máy tính gaming và văn phòng.",
+      "specs": {
+        "capacity": "16GB",
+        "type": "DDR4",
+        "speed": "3200MHz",
+        "kit": "1 x 16GB",
+        "latency": "CL16"
+      },
+      "warrantyMonths": 36,
+      "stock": 30,
+      "sold": 52,
+      "rating": 4.8,
+      "reviewCount": 27,
+      "featured": false,
+      "status": "active",
+      "createdAt": "2026-10-11"
+    },
+    {
+      "id": 25,
+      "sku": "SSD-SAM-002",
+      "name": "Samsung 870 EVO 500GB SATA",
+      "slug": "samsung-870-evo-500gb-sata",
+      "price": 1190000,
+      "originalPrice": 1390000,
+      "image": "/public/images/Samsung 870 EVO 500GB SATA.jpg",
+      "images": [
+        "/public/images/Samsung 870 EVO 500GB SATA.jpg"
+      ],
+      "categoryId": 8,
+      "brandId": 9,
+      "brand": "Samsung",
+      "description": "SSD SATA 2.5 inch bền bỉ, nâng cấp nhanh cho laptop và PC cũ.",
+      "specs": {
+        "capacity": "500GB",
+        "interface": "SATA III",
+        "formFactor": "2.5 inch",
+        "technology": "V-NAND"
+      },
+      "warrantyMonths": 60,
+      "stock": 20,
+      "sold": 40,
+      "rating": 4.9,
+      "reviewCount": 23,
+      "featured": false,
+      "status": "active",
+      "createdAt": "2026-10-11"
+    },
+    {
+      "id": 26,
+      "sku": "PSU-COR-002",
+      "name": "Corsair RM750e 750W 80 Plus Gold",
+      "slug": "corsair-rm750e-750w-gold",
+      "price": 2790000,
+      "originalPrice": 2990000,
+      "image": "/public/images/Corsair RM750e 750W 80 Plus Gold.jpg",
+      "images": [
+        "/public/images/Corsair RM750e 750W 80 Plus Gold.jpg"
+      ],
+      "categoryId": 9,
+      "brandId": 7,
+      "brand": "Corsair",
+      "description": "Nguồn full modular 750W hiệu suất cao, vận hành êm cho PC gaming cao cấp.",
+      "specs": {
+        "wattage": "750W",
+        "efficiency": "80 Plus Gold",
+        "modular": "Full modular",
+        "formFactor": "ATX"
+      },
+      "warrantyMonths": 60,
+      "stock": 9,
+      "sold": 14,
+      "rating": 4.8,
+      "reviewCount": 7,
+      "featured": false,
+      "status": "active",
+      "createdAt": "2026-10-12"
+    },
+    {
+      "id": 27,
+      "sku": "MON-GIG-001",
+      "name": "Gigabyte G27F 2 27 inch 165Hz",
+      "slug": "gigabyte-g27f-2-27-165hz",
+      "price": 3990000,
+      "originalPrice": 4490000,
+      "image": "/public/images/Gigabyte G27F 2 27 inch 165Hz.jpg",
+      "images": [
+        "/public/images/Gigabyte G27F 2 27 inch 165Hz.jpg"
+      ],
+      "categoryId": 10,
+      "brandId": 6,
+      "brand": "Gigabyte",
+      "description": "Màn hình IPS 27 inch tần số quét 165Hz, màu sắc đẹp cho game và giải trí.",
+      "specs": {
+        "size": "27 inch",
+        "resolution": "Full HD",
+        "refreshRate": "165Hz",
+        "panel": "IPS",
+        "sync": "Adaptive Sync"
+      },
+      "warrantyMonths": 36,
+      "stock": 11,
+      "sold": 26,
+      "rating": 4.7,
+      "reviewCount": 12,
+      "featured": true,
+      "status": "active",
+      "createdAt": "2026-10-12"
+    },
+    {
+      "id": 28,
+      "sku": "MON-MSI-001",
+      "name": "MSI G244F E2 24 inch 180Hz",
+      "slug": "msi-g244f-e2-24-180hz",
+      "price": 2990000,
+      "originalPrice": 3490000,
+      "image": "/public/images/MSI G244F E2 24 inch 180Hz.jpg",
+      "images": [
+        "/public/images/MSI G244F E2 24 inch 180Hz.jpg"
+      ],
+      "categoryId": 10,
+      "brandId": 5,
+      "brand": "MSI",
+      "description": "Màn hình 24 inch 180Hz, phản hồi nhanh, phù hợp game thủ eSports.",
+      "specs": {
+        "size": "24 inch",
+        "resolution": "Full HD",
+        "refreshRate": "180Hz",
+        "panel": "Rapid IPS",
+        "sync": "Adaptive Sync"
+      },
+      "warrantyMonths": 36,
+      "stock": 14,
+      "sold": 33,
+      "rating": 4.6,
+      "reviewCount": 15,
+      "featured": false,
+      "status": "active",
+      "createdAt": "2026-10-13"
+    },
+    {
+      "id": 29,
+      "sku": "MOU-LOG-001",
+      "name": "Logitech G102 LIGHTSYNC",
+      "slug": "logitech-g102-lightsync",
+      "price": 390000,
+      "originalPrice": 490000,
+      "image": "/public/images/Logitech G102 LIGHTSYNC.jpg",
+      "images": [
+        "/public/images/Logitech G102 LIGHTSYNC.jpg"
+      ],
+      "categoryId": 11,
+      "brandId": 12,
+      "brand": "Logitech",
+      "description": "Chuột gaming có dây, cảm biến chính xác, đèn RGB, giá phổ thông.",
+      "specs": {
+        "connection": "USB có dây",
+        "dpi": "8000 DPI",
+        "lighting": "RGB",
+        "weight": "85g"
+      },
+      "warrantyMonths": 24,
+      "stock": 40,
+      "sold": 90,
+      "rating": 4.8,
+      "reviewCount": 48,
+      "featured": true,
+      "status": "active",
+      "createdAt": "2026-10-14"
+    },
+    {
+      "id": 30,
+      "sku": "HS-LOG-001",
+      "name": "Logitech G435 LIGHTSPEED",
+      "slug": "logitech-g435-lightspeed",
+      "price": 1490000,
+      "originalPrice": 1790000,
+      "image": "/public/images/Logitech G435 LIGHTSPEED.jpg",
+      "images": [
+        "/public/images/Logitech G435 LIGHTSPEED.jpg"
+      ],
+      "categoryId": 11,
+      "brandId": 12,
+      "brand": "Logitech",
+      "description": "Tai nghe gaming không dây nhẹ, kết nối LIGHTSPEED và Bluetooth.",
+      "specs": {
+        "connection": "Wireless + Bluetooth",
+        "type": "Over-ear",
+        "weight": "165g",
+        "battery": "Đến 18 giờ"
+      },
+      "warrantyMonths": 24,
+      "stock": 16,
+      "sold": 36,
+      "rating": 4.6,
+      "reviewCount": 19,
+      "featured": false,
+      "status": "active",
+      "createdAt": "2026-10-15"
+    },
+    {
       "name": "GearZone Gaming Starter R6",
       "price": 18980000,
-      "image": "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=900&q=80",
+      "image": "/public/images/GearZone Gaming Starter R6.jpg",
       "categoryId": 1,
       "description": "PC gaming phổ thông phù hợp chơi game Full HD và học tập, làm việc hằng ngày.",
       "id": 1
@@ -221,9 +691,9 @@
       "slug": "asus-tuf-gaming-f15",
       "price": 22990000,
       "originalPrice": 24990000,
-      "image": "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=900&q=80",
+      "image": "/public/images/ASUS TUF Gaming F15.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=900&q=80"
+        "/public/images/ASUS TUF Gaming F15.jpg"
       ],
       "categoryId": 2,
       "brandId": 4,
@@ -253,9 +723,9 @@
       "slug": "amd-ryzen-5-5600",
       "price": 2490000,
       "originalPrice": 2790000,
-      "image": "https://images.unsplash.com/photo-1555617981-dac3880eac6e?auto=format&fit=crop&w=900&q=80",
+      "image": "/public/images/AMD Ryzen 5 5600.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1555617981-dac3880eac6e?auto=format&fit=crop&w=900&q=80"
+        "/public/images/AMD Ryzen 5 5600.jpg"
       ],
       "categoryId": 4,
       "brandId": 2,
@@ -286,9 +756,9 @@
       "slug": "intel-core-i5-14400f",
       "price": 4590000,
       "originalPrice": 4990000,
-      "image": "https://images.unsplash.com/photo-1555617981-dac3880eac6e?auto=format&fit=crop&w=900&q=80",
+      "image": "/public/images/Intel Core i5-14400F.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1555617981-dac3880eac6e?auto=format&fit=crop&w=900&q=80"
+        "/public/images/Intel Core i5-14400F.jpg"
       ],
       "categoryId": 4,
       "brandId": 1,
@@ -319,9 +789,9 @@
       "slug": "msi-b550m-pro-vdh-wifi",
       "price": 2490000,
       "originalPrice": 2690000,
-      "image": "https://images.unsplash.com/photo- motherboard?auto=format&fit=crop&w=900&q=80",
+      "image": "/public/images/MSI B550M PRO-VDH WIFI.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1555617981-dac3880eac6e?auto=format&fit=crop&w=900&q=80"
+        "/public/images/MSI B550M PRO-VDH WIFI.jpg"
       ],
       "categoryId": 5,
       "brandId": 5,
@@ -351,9 +821,9 @@
       "slug": "asus-dual-rtx-4060-8gb",
       "price": 7890000,
       "originalPrice": 8490000,
-      "image": "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=900&q=80",
+      "image": "/public/images/ASUS Dual GeForce RTX 4060 8GB.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=900&q=80"
+        "/public/images/ASUS Dual GeForce RTX 4060 8GB.jpg"
       ],
       "categoryId": 6,
       "brandId": 4,
@@ -382,9 +852,9 @@
       "slug": "kingston-fury-beast-16gb-ddr4-3200",
       "price": 890000,
       "originalPrice": 1090000,
-      "image": "https://images.unsplash.com/photo-1562976540-1502c214e7c2?auto=format&fit=crop&w=900&q=80",
+      "image": "/public/images/Kingston Fury Beast 16GB DDR4 3200.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1562976540-1502c214e7c2?auto=format&fit=crop&w=900&q=80"
+        "/public/images/Kingston Fury Beast 16GB DDR4 3200.jpg"
       ],
       "categoryId": 7,
       "brandId": 8,
@@ -413,9 +883,9 @@
       "slug": "samsung-990-evo-nvme-1tb",
       "price": 2190000,
       "originalPrice": 2490000,
-      "image": "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=900&q=80",
+      "image": "/public/images/Samsung 990 EVO NVMe 1TB.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=900&q=80"
+        "/public/images/Samsung 990 EVO NVMe 1TB.jpg"
       ],
       "categoryId": 8,
       "brandId": 9,
@@ -444,9 +914,9 @@
       "slug": "corsair-cv650-650w",
       "price": 1390000,
       "originalPrice": 1590000,
-      "image": "https://images.unsplash.com/photo-158?auto=format&fit=crop&w=900&q=80",
+      "image": "/public/images/Corsair CV650 650W 80 Plus Bronze.jpg",
       "images": [
-        "https://images.unsplash.com/photo-158?auto=format&fit=crop&w=900&q=80"
+        "/public/images/Corsair CV650 650W 80 Plus Bronze.jpg"
       ],
       "categoryId": 9,
       "brandId": 7,
@@ -474,9 +944,9 @@
       "slug": "asus-tuf-gaming-24-165hz",
       "price": 3290000,
       "originalPrice": 3690000,
-      "image": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=900&q=80",
+      "image": "/public/images/ASUS TUF Gaming 24 inch 165Hz.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=900&q=80"
+        "/public/images/ASUS TUF Gaming 24 inch 165Hz.jpg"
       ],
       "categoryId": 10,
       "brandId": 4,
@@ -505,9 +975,9 @@
       "slug": "logitech-g213-gaming-keyboard",
       "price": 990000,
       "originalPrice": 1190000,
-      "image": "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=900&q=80",
+      "image": "/public/images/Logitech G213 Gaming Keyboard.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=900&q=80"
+        "/public/images/Logitech G213 Gaming Keyboard.jpg"
       ],
       "categoryId": 11,
       "brandId": 12,
@@ -535,9 +1005,9 @@
       "slug": "dell-inspiron-15",
       "price": 15990000,
       "originalPrice": 16990000,
-      "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=900&q=80",
+      "image": "/public/images/Dell Inspiron 15.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=900&q=80"
+        "/public/images/Dell Inspiron 15.jpg"
       ],
       "categoryId": 2,
       "brandId": 10,
@@ -567,9 +1037,9 @@
       "slug": "corsair-vengeance-32gb-ddr5",
       "price": 2390000,
       "originalPrice": 2690000,
-      "image": "https://images.unsplash.com/photo-1562976540-1502c214e7c2?auto=format&fit=crop&w=900&q=80",
+      "image": "/public/images/Corsair Vengeance 32GB DDR5.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1562976540-1502c214e7c2?auto=format&fit=crop&w=900&q=80"
+        "/public/images/Corsair Vengeance 32GB DDR5.jpg"
       ],
       "categoryId": 7,
       "brandId": 7,
@@ -598,9 +1068,9 @@
       "slug": "gigabyte-rtx-4070-super-12gb",
       "price": 17990000,
       "originalPrice": 18990000,
-      "image": "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=900&q=80",
+      "image": "/public/images/Gigabyte GeForce RTX 4070 SUPER 12GB.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=900&q=80"
+        "/public/images/Gigabyte GeForce RTX 4070 SUPER 12GB.jpg"
       ],
       "categoryId": 6,
       "brandId": 6,
@@ -629,9 +1099,9 @@
       "slug": "kingston-nv2-nvme-1tb",
       "price": 1690000,
       "originalPrice": 1890000,
-      "image": "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=900&q=80",
+      "image": "/public/images/Kingston NV2 NVMe 1TB.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=900&q=80"
+        "/public/images/Kingston NV2 NVMe 1TB.jpg"
       ],
       "categoryId": 8,
       "brandId": 8,
@@ -691,14 +1161,14 @@
           "id": 2,
           "name": "ASUS TUF Gaming F15",
           "price": 22990000,
-          "image": "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=900&q=80",
+          "image": "/public/images/ASUS TUF Gaming F15.jpg",
           "qty": 1
         },
         {
           "id": 1,
           "name": "GearZone Gaming Starter R6",
           "price": 18990000,
-          "image": "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=900&q=80",
+          "image": "/public/images/gearzone-gaming-starter-r6.jpg",
           "qty": 2
         }
       ],
