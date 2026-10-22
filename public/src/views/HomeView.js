@@ -1,218 +1,144 @@
 import BaseView from './BaseView.js';
 import { formatPrice, escapeHtml } from '../utils/helpers.js';
 
+// Sửa xung đột Tailwind và Bootstrap: Tailwind có class .collapse { visibility: collapse }
+// làm ẩn menu header của Bootstrap. Ghi đè lại để header luôn hiện.
+if (!document.getElementById('fix-bootstrap-collapse')) {
+  const fix = document.createElement('style');
+  fix.id = 'fix-bootstrap-collapse';
+  fix.textContent = '.navbar-collapse { visibility: visible !important; }';
+  document.head.appendChild(fix);
+}
+
 // Lưu listener / timer ở ngoài class để lần sau vào trang chủ còn gỡ được cái cũ
 let cartClickListener = null;
 let heroTimer = null;
 
-// Icon cho từng danh mục (theo id trong db.json)
-const CATEGORY_ICONS = {
-  1: '🖥️', 2: '💻', 3: '🔧', 4: '🧠', 5: '🧩',
-  6: '🎮', 7: '💾', 8: '💽', 9: '🔌', 10: '🖵', 11: '🎧',
-};
-
-// Thanh tiêu đề mỗi mục: tên mục + chip lọc + "Xem tất cả"
-function sectionHeader(title, tag, chips, categoryId) {
-  const chipsHtml = chips.map(c =>
-    `<a href="#/products?category=${categoryId}"
-        class="text-xs md:text-sm text-slate-600 hover:text-red-600 font-medium">${c}</a>`
-  ).join('');
-
+// Tiêu đề mỗi mục: thanh xanh bên trái + "Xem tất cả"
+function sectionHeader(title, subtitle, link) {
   return `
-    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
-      <div class="flex items-center gap-3">
-        <h2 class="text-lg md:text-xl font-extrabold text-slate-800">${title}</h2>
-        <span class="hidden sm:inline-flex items-center gap-1 text-xs font-semibold text-red-600">
-          <span>🚩</span>${tag}
-        </span>
+    <div class="flex items-end justify-between gap-3 mb-4">
+      <div class="border-l-4 border-blue-600 pl-3">
+        <h2 class="text-xl md:text-2xl font-extrabold text-slate-800 m-0">${title}</h2>
+        <p class="text-sm text-slate-500 m-0">${subtitle}</p>
       </div>
-      <div class="flex items-center gap-4">
-        <div class="hidden md:flex items-center gap-4">${chipsHtml}</div>
-        <a href="#/products?category=${categoryId}"
-           class="text-sm font-semibold text-blue-600 hover:underline whitespace-nowrap">Xem tất cả ›</a>
-      </div>
+      <a href="${link}" class="text-sm font-semibold text-blue-600 hover:underline whitespace-nowrap no-underline">Xem tất cả</a>
     </div>`;
-}
-
-// Banner nhỏ dùng chung
-function miniBanner(icon, title, sub, gradient) {
-  return `
-    <a href="#/products"
-       class="flex items-center gap-3 rounded-xl p-4 text-white shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition ${gradient}">
-      <span class="text-3xl">${icon}</span>
-      <span>
-        <span class="block text-sm font-extrabold leading-tight">${title}</span>
-        <span class="block text-xs opacity-90">${sub}</span>
-      </span>
-    </a>`;
 }
 
 export default class HomeView extends BaseView {
   renderLayout(categories) {
-    const mainCategories = categories.filter(c => !c.parentId);
-
-    // Menu trái: mục nào có danh mục con thì hiện menu con khi rê chuột
-    const menuHtml = mainCategories.map(c => {
-      const children = categories.filter(x => Number(x.parentId) === Number(c.id));
-      const childHtml = children.length ? `
-        <div class="hidden group-hover:block absolute left-full top-0 ml-1 w-60 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-30">
-          ${children.map(ch => `
-            <a href="#/products?category=${ch.id}"
-               class="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-red-50 hover:text-red-600">
-              <span>${CATEGORY_ICONS[ch.id] || '📦'}</span>${escapeHtml(ch.name)}
-            </a>`).join('')}
-        </div>` : '';
-
-      return `
-        <div class="group relative">
-          <a href="#/products?category=${c.id}"
-             class="flex items-center justify-between px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-red-50 hover:text-red-600 transition">
-            <span class="flex items-center gap-3 truncate">
-              <span class="text-base">${CATEGORY_ICONS[c.id] || '📦'}</span>
-              <span class="truncate">${escapeHtml(c.name)}</span>
-            </span>
-            <span class="text-slate-300 group-hover:text-red-500">›</span>
-          </a>
-          ${childHtml}
-        </div>`;
-    }).join('');
+    const topCategories = categories
+      .filter(c => !c.parentId && c.active !== false)
+      .sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
 
     this.setHTML(`
-      <div class="bg-slate-100 pb-10">
+      <div class="bg-slate-50 pb-12">
 
-        <!-- 1. HERO: menu - slider - banner phải -->
-        <section class="max-w-7xl mx-auto px-4 pt-4 grid grid-cols-1 lg:grid-cols-[230px_1fr_260px] gap-3">
+        <!-- 1. HERO -->
+        <section class="max-w-7xl mx-auto px-4 pt-5 grid grid-cols-1 lg:grid-cols-3 gap-4">
 
-          <nav class="hidden lg:block bg-white rounded-xl py-2 shadow-sm border border-slate-100 self-start">
-            ${menuHtml}
-          </nav>
-
-          <!-- Slider -->
-          <div class="relative rounded-xl overflow-hidden shadow-sm min-h-[260px] md:min-h-[330px]" id="hero-slider">
-            <div class="hero-slide absolute inset-0 transition-opacity duration-700 opacity-100 p-8 md:p-10 flex flex-col justify-center text-white bg-gradient-to-br from-slate-900 via-red-900 to-red-600">
-              <span class="w-fit bg-white/15 px-3 py-1 rounded-full text-xs font-bold uppercase">🔥 Khuyến mãi tháng 10</span>
-              <h1 class="text-3xl md:text-5xl font-extrabold mt-4 leading-tight">Build PC Gaming<br><span class="text-yellow-300">Tặng màn hình 240Hz</span></h1>
-              <p class="mt-3 text-sm text-red-100">Linh kiện chính hãng, lắp ráp và kiểm thử miễn phí.</p>
-              <a href="#/products?category=1" class="mt-5 w-fit bg-white text-red-600 font-bold text-sm px-6 py-3 rounded-xl hover:bg-red-50 transition">Xem ngay</a>
+          <div class="relative lg:col-span-2 rounded-2xl overflow-hidden h-[280px] md:h-[360px] shadow-sm">
+            <div class="hero-slide absolute inset-0 transition-opacity duration-700 opacity-100 px-8 md:px-14 flex flex-col justify-center text-white bg-gradient-to-br from-slate-900 via-blue-900 to-blue-600">
+              <span class="w-fit bg-white/15 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">Khuyến mãi tháng 10</span>
+              <h1 class="text-3xl md:text-5xl font-extrabold mt-4 mb-0 leading-tight">Build PC Gaming<br><span class="text-yellow-300">Tặng màn hình 240Hz</span></h1>
+              <p class="mt-3 mb-0 text-sm md:text-base text-blue-100">Linh kiện chính hãng, lắp ráp và kiểm thử miễn phí.</p>
+              <a href="#/category/1" class="mt-6 w-fit bg-white text-blue-700 font-bold text-sm px-6 py-3 rounded-xl hover:bg-blue-50 no-underline transition">Xem ngay</a>
             </div>
 
-            <div class="hero-slide absolute inset-0 transition-opacity duration-700 opacity-0 p-8 md:p-10 flex flex-col justify-center text-white bg-gradient-to-br from-blue-900 via-blue-700 to-cyan-500">
-              <span class="w-fit bg-white/15 px-3 py-1 rounded-full text-xs font-bold uppercase">💻 Laptop Gaming</span>
-              <h2 class="text-3xl md:text-5xl font-extrabold mt-4 leading-tight">Laptop Gaming<br><span class="text-yellow-300">Giảm đến 26%</span></h2>
-              <p class="mt-3 text-sm text-blue-100">RTX 40 Series, màn hình 144Hz, bảo hành 24 tháng.</p>
-              <a href="#/products?category=2" class="mt-5 w-fit bg-white text-blue-700 font-bold text-sm px-6 py-3 rounded-xl hover:bg-blue-50 transition">Mua ngay</a>
+            <div class="hero-slide absolute inset-0 transition-opacity duration-700 opacity-0 px-8 md:px-14 flex flex-col justify-center text-white bg-gradient-to-br from-indigo-900 via-indigo-700 to-sky-500">
+              <span class="w-fit bg-white/15 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">Laptop Gaming</span>
+              <h2 class="text-3xl md:text-5xl font-extrabold mt-4 mb-0 leading-tight">Laptop Gaming<br><span class="text-yellow-300">Giảm đến 26%</span></h2>
+              <p class="mt-3 mb-0 text-sm md:text-base text-blue-100">RTX 40 Series, màn hình 144Hz, bảo hành 24 tháng.</p>
+              <a href="#/category/2" class="mt-6 w-fit bg-white text-indigo-700 font-bold text-sm px-6 py-3 rounded-xl hover:bg-indigo-50 no-underline transition">Mua ngay</a>
             </div>
 
-            <div class="hero-slide absolute inset-0 transition-opacity duration-700 opacity-0 p-8 md:p-10 flex flex-col justify-center text-white bg-gradient-to-br from-violet-900 via-purple-700 to-pink-500">
-              <span class="w-fit bg-white/15 px-3 py-1 rounded-full text-xs font-bold uppercase">🖵 Màn hình</span>
-              <h2 class="text-3xl md:text-5xl font-extrabold mt-4 leading-tight">Màn hình 165Hz<br><span class="text-yellow-300">Giảm sốc đến 53%</span></h2>
-              <p class="mt-3 text-sm text-purple-100">Chính hãng, bảo hành 36 tháng.</p>
-              <a href="#/products?category=10" class="mt-5 w-fit bg-white text-purple-700 font-bold text-sm px-6 py-3 rounded-xl hover:bg-purple-50 transition">Xem màn hình</a>
+            <div class="hero-slide absolute inset-0 transition-opacity duration-700 opacity-0 px-8 md:px-14 flex flex-col justify-center text-white bg-gradient-to-br from-slate-800 via-slate-700 to-cyan-600">
+              <span class="w-fit bg-white/15 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">Màn hình</span>
+              <h2 class="text-3xl md:text-5xl font-extrabold mt-4 mb-0 leading-tight">Màn hình 165Hz<br><span class="text-yellow-300">Giá tốt mỗi ngày</span></h2>
+              <p class="mt-3 mb-0 text-sm md:text-base text-slate-200">Chính hãng, bảo hành 36 tháng.</p>
+              <a href="#/category/10" class="mt-6 w-fit bg-white text-slate-800 font-bold text-sm px-6 py-3 rounded-xl hover:bg-slate-100 no-underline transition">Xem màn hình</a>
             </div>
 
-            <button type="button" id="hero-prev" class="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/80 hover:bg-white text-slate-700 shadow">‹</button>
-            <button type="button" id="hero-next" class="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/80 hover:bg-white text-slate-700 shadow">›</button>
-            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2" id="hero-dots">
+            <button type="button" id="hero-prev" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/80 hover:bg-white text-slate-700 font-bold shadow">&lt;</button>
+            <button type="button" id="hero-next" class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/80 hover:bg-white text-slate-700 font-bold shadow">&gt;</button>
+            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
               <span class="hero-dot w-2.5 h-2.5 rounded-full bg-white"></span>
               <span class="hero-dot w-2.5 h-2.5 rounded-full bg-white/50"></span>
               <span class="hero-dot w-2.5 h-2.5 rounded-full bg-white/50"></span>
             </div>
           </div>
 
-          <!-- Banner phải -->
-          <div class="grid grid-cols-2 lg:grid-cols-1 gap-3">
-            <a href="#/products?category=1" class="rounded-xl bg-gradient-to-br from-sky-500 to-blue-700 text-white p-4 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition">
-              <div class="text-xs opacity-90">Build PC</div>
-              <div class="text-xl font-extrabold leading-tight">Tặng màn hình 240Hz</div>
-              <div class="text-xs mt-1">Giá chỉ từ 18.990.000đ</div>
+          <div class="grid grid-cols-2 lg:grid-cols-1 lg:grid-rows-2 gap-4">
+            <a href="#/category/1" class="flex flex-col justify-center rounded-2xl bg-gradient-to-br from-sky-500 to-blue-700 text-white p-6 shadow-sm hover:shadow-lg transition no-underline">
+              <span class="text-xs uppercase tracking-wide text-blue-100">Build PC</span>
+              <span class="text-xl md:text-2xl font-extrabold leading-tight mt-1">Chỉ từ 18.990.000đ</span>
+              <span class="text-xs text-blue-100 mt-1">Bảo hành 24 tháng</span>
             </a>
-            <a href="#/products?category=2" class="rounded-xl bg-gradient-to-br from-slate-700 to-slate-900 text-white p-4 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition">
-              <div class="text-xs opacity-90">Laptop Gaming</div>
-              <div class="text-xl font-extrabold leading-tight">Giảm đến 26%</div>
-              <div class="text-xs mt-1">Tặng balo + chuột</div>
-            </a>
-            <a href="#/products?category=3" class="hidden lg:block rounded-xl bg-gradient-to-br from-amber-500 to-red-500 text-white p-4 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition">
-              <div class="text-xs opacity-90">Linh kiện PC</div>
-              <div class="text-xl font-extrabold leading-tight">CPU - VGA - RAM</div>
-              <div class="text-xs mt-1">Chính hãng, trả góp 0%</div>
+            <a href="#/category/3" class="flex flex-col justify-center rounded-2xl bg-gradient-to-br from-slate-700 to-slate-900 text-white p-6 shadow-sm hover:shadow-lg transition no-underline">
+              <span class="text-xs uppercase tracking-wide text-slate-300">Linh kiện PC</span>
+              <span class="text-xl md:text-2xl font-extrabold leading-tight mt-1">CPU - VGA - RAM</span>
+              <span class="text-xs text-slate-300 mt-1">Chính hãng, trả góp 0%</span>
             </a>
           </div>
         </section>
 
-        <!-- 2. DẢI 4 BANNER NHỎ -->
-        <section class="max-w-7xl mx-auto px-4 pt-3 grid grid-cols-2 lg:grid-cols-4 gap-3">
-          ${miniBanner('🎧', 'Gaming Gear', 'Giảm đến 40%', 'bg-gradient-to-r from-indigo-600 to-blue-500')}
-          ${miniBanner('🖵', 'Monitor', 'Giảm đến 51%', 'bg-gradient-to-r from-slate-700 to-slate-500')}
-          ${miniBanner('🖱️', 'Gaming Mouse', 'Chỉ từ 80.000đ', 'bg-gradient-to-r from-orange-500 to-amber-400')}
-          ${miniBanner('🖥️', 'PC RTX 5090', 'Gaming - OLED', 'bg-gradient-to-r from-red-700 to-red-500')}
-        </section>
-
-        <!-- 3. 2 BANNER RỘNG -->
-        <section class="max-w-7xl mx-auto px-4 pt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
-          <a href="#/products?category=1" class="rounded-xl p-6 text-white bg-gradient-to-r from-blue-700 to-sky-400 shadow-sm hover:shadow-lg transition">
-            <div class="text-2xl font-extrabold">Build PC Tặng Màn Hình</div>
-            <div class="text-sm mt-1">Giá chỉ từ <b class="text-yellow-300">11.990.000đ</b></div>
-          </a>
-          <a href="#/products?category=2" class="rounded-xl p-6 text-white bg-gradient-to-r from-purple-700 to-pink-500 shadow-sm hover:shadow-lg transition">
-            <div class="text-2xl font-extrabold">Pack Laptop Tặng Gear</div>
-            <div class="text-sm mt-1">Quà tặng lên đến <b class="text-yellow-300">15.000.000đ</b></div>
-          </a>
-        </section>
-
-        <!-- 4. PC BÁN CHẠY -->
-        <section class="max-w-7xl mx-auto px-4 mt-6">
-          <div class="bg-white rounded-xl p-4 shadow-sm">
-            ${sectionHeader('PC bán chạy', 'Tặng màn hình 240Hz', ['PC i3', 'PC i5', 'PC i7', 'PC R5', 'PC R7'], 1)}
-            <div id="pc-list" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3"></div>
+        <!-- 2. CHÍNH SÁCH -->
+        <section class="max-w-7xl mx-auto px-4 mt-5">
+          <div class="bg-white border border-slate-200 rounded-2xl grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-slate-100">
+            <div class="p-4"><b class="block text-sm text-slate-800">Chính hãng 100%</b><span class="text-xs text-slate-500">Đầy đủ hóa đơn</span></div>
+            <div class="p-4"><b class="block text-sm text-slate-800">Giao hàng toàn quốc</b><span class="text-xs text-slate-500">Miễn phí từ 5.000.000đ</span></div>
+            <div class="p-4"><b class="block text-sm text-slate-800">Bảo hành dài hạn</b><span class="text-xs text-slate-500">Đến 60 tháng</span></div>
+            <div class="p-4"><b class="block text-sm text-slate-800">Hỗ trợ 1900 1234</b><span class="text-xs text-slate-500">Tư vấn miễn phí</span></div>
           </div>
         </section>
 
-        <!-- 5. LAPTOP (có banner đứng bên trái) -->
-        <section class="max-w-7xl mx-auto px-4 mt-6">
-          <div class="bg-white rounded-xl p-4 shadow-sm">
-            ${sectionHeader('Laptop gaming bán chạy', 'Tặng combo gear đến 15 triệu', ['ASUS', 'ACER', 'MSI', 'LENOVO', 'DELL'], 2)}
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-3">
-              <a href="#/products?category=2"
-                 class="hidden lg:flex flex-col justify-end rounded-xl p-5 text-white bg-gradient-to-b from-slate-800 via-blue-900 to-blue-600 hover:shadow-lg transition">
-                <div class="text-4xl mb-2">💻</div>
-                <div class="text-xl font-extrabold leading-tight">Laptop Gaming</div>
-                <div class="text-sm mt-1 text-blue-100">Giảm đến 26%</div>
-                <div class="mt-3 w-fit bg-white text-blue-700 text-xs font-bold px-3 py-1.5 rounded-lg">Xem ngay</div>
-              </a>
-              <div id="laptop-list" class="lg:col-span-4 grid grid-cols-2 md:grid-cols-4 gap-3"></div>
+        <!-- 3. DANH MỤC (ảnh lấy từ db.json) -->
+        <section class="max-w-7xl mx-auto px-4 mt-8">
+          ${sectionHeader('Danh mục sản phẩm', 'Chọn nhóm sản phẩm bạn quan tâm', '#/products')}
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+            ${topCategories.map(c => `
+              <a href="#/category/${c.id}" class="group relative block h-28 md:h-36 rounded-xl overflow-hidden bg-slate-300 no-underline">
+                <img src="${c.image}" alt="${escapeHtml(c.name)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.style.display='none'">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent flex items-end p-3">
+                  <span class="text-white font-semibold text-sm">${escapeHtml(c.name)}</span>
+                </div>
+              </a>`).join('')}
+          </div>
+        </section>
+
+        <!-- 4. PC & LAPTOP -->
+        <section class="max-w-7xl mx-auto px-4 mt-10">
+          ${sectionHeader('PC và Laptop', 'Máy tính dựng sẵn và laptop chính hãng', '#/category/1')}
+          <div id="pc-laptop-list" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"></div>
+        </section>
+
+        <!-- 5. LINH KIỆN -->
+        <section class="max-w-7xl mx-auto px-4 mt-10">
+          ${sectionHeader('Linh kiện máy tính', 'CPU, mainboard, VGA, RAM, SSD, nguồn', '#/category/3')}
+          <div id="parts-list" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"></div>
+        </section>
+
+        <!-- 6. MÀN HÌNH & GAMING GEAR -->
+        <section class="max-w-7xl mx-auto px-4 mt-10">
+          ${sectionHeader('Màn hình và Gaming Gear', 'Màn hình, bàn phím, chuột, tai nghe', '#/category/10')}
+          <div id="monitor-gear-list" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"></div>
+        </section>
+
+        <!-- 7. BÁN CHẠY NHẤT -->
+        <section class="max-w-7xl mx-auto px-4 mt-10">
+          ${sectionHeader('Bán chạy nhất', 'Được khách hàng chọn mua nhiều', '#/products')}
+          <div id="best-list" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"></div>
+        </section>
+
+        <!-- 8. LIÊN HỆ -->
+        <section class="max-w-7xl mx-auto px-4 mt-12">
+          <div class="rounded-2xl p-8 md:p-10 flex flex-wrap items-center justify-between gap-4 text-white bg-gradient-to-r from-blue-900 via-blue-700 to-indigo-600">
+            <div>
+              <div class="text-2xl md:text-3xl font-extrabold leading-snug">Cần tư vấn cấu hình máy?</div>
+              <div class="text-sm text-blue-100 mt-1">Gọi 1900 1234 hoặc để lại thông tin, TTD Shop sẽ liên hệ lại.</div>
             </div>
-          </div>
-        </section>
-
-        <!-- 6. LINH KIỆN -->
-        <section class="max-w-7xl mx-auto px-4 mt-6">
-          <div class="bg-white rounded-xl p-4 shadow-sm">
-            ${sectionHeader('Linh kiện máy tính', 'Chính hãng - bảo hành đến 60 tháng', ['CPU', 'VGA', 'RAM', 'SSD', 'PSU'], 3)}
-            <div id="parts-list" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3"></div>
-          </div>
-        </section>
-
-        <!-- 7. MÀN HÌNH -->
-        <section class="max-w-7xl mx-auto px-4 mt-6">
-          <div class="bg-white rounded-xl p-4 shadow-sm">
-            ${sectionHeader('Màn hình chính hãng', 'Bảo hành 1 đổi 1', ['ASUS', 'LG', 'DELL', 'GIGABYTE', 'AOC'], 10)}
-            <div id="monitor-list" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3"></div>
-          </div>
-        </section>
-
-        <!-- 8. GAMING GEAR -->
-        <section class="max-w-7xl mx-auto px-4 mt-6">
-          <div class="bg-white rounded-xl p-4 shadow-sm">
-            ${sectionHeader('Gaming Gear bán chạy', 'Giao hàng toàn quốc', ['Logitech', 'Razer', 'Asus', 'Corsair'], 11)}
-            <div id="gear-list" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3"></div>
-          </div>
-        </section>
-
-        <!-- 9. BANNER TIN TỨC -->
-        <section class="max-w-7xl mx-auto px-4 mt-6">
-          <div class="rounded-xl p-8 md:p-10 flex flex-wrap items-center justify-between gap-4 text-white bg-gradient-to-r from-blue-900 via-blue-700 to-indigo-600 shadow-sm">
-            <div class="text-2xl md:text-3xl font-extrabold leading-snug">Cập nhật tin tức công nghệ<br>mới nhất cùng GearZone</div>
-            <a href="#/about" class="border border-white/60 hover:bg-white/10 px-6 py-3 rounded-xl font-semibold transition">Xem tất cả →</a>
+            <a href="#/contact" class="bg-white text-blue-700 font-bold px-6 py-3 rounded-xl hover:bg-blue-50 no-underline transition">Liên hệ ngay</a>
           </div>
         </section>
 
@@ -220,7 +146,7 @@ export default class HomeView extends BaseView {
     `);
   }
 
-  // Chạy slider tự chuyển slide mỗi 4 giây
+  // Slider tự chuyển slide mỗi 4 giây
   bindHero() {
     if (heroTimer) clearInterval(heroTimer);
 
@@ -252,78 +178,57 @@ export default class HomeView extends BaseView {
   }
 
   renderProductsGroup(containerId, products) {
-    const container = this['$']('#' + containerId);
+    const container = this.$('#' + containerId);
     if (!container) return;
 
     if (!products || !products.length) {
-      container.innerHTML = '<p class="col-span-full text-center text-slate-400 py-6">Đang cập nhật sản phẩm...</p>';
+      container.innerHTML = '<p class="col-span-full text-center text-slate-400 py-8">Đang cập nhật sản phẩm...</p>';
       return;
     }
 
     container.innerHTML = products.map(p => {
-      const discountPercent = p.originalPrice && p.price
+      const discount = p.originalPrice > p.price
         ? Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100)
         : 0;
 
-      // Chip thông số: chỉ lấy giá trị chữ/số, bỏ true/false
-      const specChips = p.specs
-        ? Object.values(p.specs)
-          .filter(v => typeof v === 'string' || typeof v === 'number')
-          .slice(0, 4)
-          .map(v => `<span class="bg-slate-100 text-slate-600 text-[10px] px-1.5 py-0.5 rounded truncate max-w-full">${escapeHtml(String(v))}</span>`)
-          .join('')
-        : '';
+      // Chip thông số: chỉ lấy chữ/số ngắn, tối đa 3 chip
+      const chips = Object.values(p.specs || {})
+        .filter(v => (typeof v === 'string' || typeof v === 'number') && String(v).length <= 16)
+        .slice(0, 3)
+        .map(v => `<span class="bg-slate-100 text-slate-600 text-[10px] px-1.5 py-0.5 rounded">${escapeHtml(String(v))}</span>`)
+        .join('');
 
-      const badgeHtml = discountPercent > 0
-        ? `<span class="absolute top-2 left-2 z-10 bg-red-600 text-white text-[11px] font-bold px-1.5 py-0.5 rounded">Giảm ${discountPercent}%</span>`
-        : '';
-
-      const hotHtml = (p.sold && p.sold >= 30)
-        ? '<span class="inline-block bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded mb-1">🔥 HOÁ TỐC</span>'
-        : '';
-
-      const oldPriceHtml = p.originalPrice
-        ? `<span class="text-xs text-slate-400 line-through">${formatPrice(p.originalPrice)}</span>
-           <span class="text-[11px] text-red-500 font-semibold">-${discountPercent}%</span>`
-        : '';
-
-      const promoText = p.price >= 2000000 ? '🎁 Miễn phí giao hàng toàn quốc' : '🎁 Mua kèm giá ưu đãi';
+      const inStock = Number(p.stock) > 0;
 
       return `
-        <div class="group flex flex-col justify-between h-full bg-white rounded-xl p-3 border border-slate-200
-                    hover:shadow-xl hover:border-red-300 hover:-translate-y-0.5 transition duration-300">
-          <div>
-            <div class="relative w-full h-40 flex items-center justify-center mb-2">
-              ${badgeHtml}
-              <a href="#/product/${p.id}" class="w-full h-full flex items-center justify-center">
-                <img src="${p.image}" alt="${escapeHtml(p.name)}"
-                     class="max-w-full max-h-full object-contain group-hover:scale-105 transition duration-300"
-                     onerror="this.style.display='none'">
-              </a>
+        <div class="group bg-white rounded-xl border border-slate-200 overflow-hidden flex flex-col
+                    hover:shadow-lg hover:-translate-y-0.5 transition duration-300">
+          <a href="#/product/${p.id}" class="relative block aspect-square bg-slate-100 overflow-hidden no-underline">
+            ${discount ? `<span class="absolute top-2 left-2 z-10 bg-red-500 text-white text-[11px] font-bold px-2 py-0.5 rounded">-${discount}%</span>` : ''}
+            <img src="${p.image}" alt="${escapeHtml(p.name)}"
+                 class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                 onerror="this.style.display='none'">
+          </a>
+
+          <div class="p-3 flex flex-col flex-1">
+            <span class="text-[11px] font-semibold text-blue-600 uppercase tracking-wide">${escapeHtml(p.brand || '')}</span>
+            <a href="#/product/${p.id}" title="${escapeHtml(p.name)}"
+               class="mt-1 text-sm font-semibold text-slate-800 hover:text-blue-600 leading-snug no-underline
+                      line-clamp-2 min-h-[2.5rem]">${escapeHtml(p.name)}</a>
+
+            <div class="flex flex-wrap gap-1 mt-2 min-h-[22px]">${chips}</div>
+
+            <div class="mt-auto pt-3">
+              <div class="h-4 text-xs text-slate-400 line-through">${discount ? formatPrice(p.originalPrice) : ''}</div>
+              <div class="text-lg font-extrabold text-blue-600">${formatPrice(p.price)}</div>
+              <div class="mt-1 text-[11px] text-slate-500">Đã bán ${p.sold || 0} | ${inStock ? `Còn ${p.stock}` : 'Hết hàng'}</div>
+
+              <button type="button" data-add="${p.id}" ${inStock ? '' : 'disabled'}
+                      class="mt-3 w-full bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-semibold text-sm py-2
+                             rounded-lg transition cursor-pointer disabled:bg-slate-300 disabled:cursor-not-allowed">
+                ${inStock ? 'Thêm vào giỏ' : 'Hết hàng'}
+              </button>
             </div>
-
-            ${hotHtml}
-            <a href="#/product/${p.id}" class="no-underline">
-              <h3 class="text-[13px] font-semibold text-slate-800 leading-snug h-9 overflow-hidden group-hover:text-red-600 transition"
-                  title="${escapeHtml(p.name)}">${escapeHtml(p.name)}</h3>
-            </a>
-
-            <div class="flex flex-wrap gap-1 mt-2 min-h-[22px]">${specChips}</div>
-          </div>
-
-          <div class="mt-3">
-            <div class="flex items-center gap-2 h-4">${oldPriceHtml}</div>
-            <div class="text-base font-extrabold text-red-600">${formatPrice(p.price)}</div>
-
-            <div class="mt-2 text-[11px] text-slate-600 bg-slate-50 border border-slate-100 rounded-lg px-2 py-1.5 truncate">
-              ${promoText}
-            </div>
-
-            <button class="btn-buy mt-2 w-full bg-red-600 hover:bg-red-700 active:scale-95 text-white font-semibold
-                           text-xs py-2 rounded-lg transition cursor-pointer"
-                    data-add="${p.id}">
-              🛒 Thêm vào giỏ
-            </button>
           </div>
         </div>`;
     }).join('');
