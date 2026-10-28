@@ -2,7 +2,7 @@
 export default class Router {
   constructor() {
     this.routes = [];
-    this.notFound = () => {};
+    this.notFound = () => { };
     window.addEventListener('hashchange', () => this.resolve());
   }
 
@@ -25,6 +25,7 @@ export default class Router {
         return handler(params);
       }
     }
+    window.scrollTo(0, 0);
     this.notFound();
   }
 

@@ -1,3 +1,4 @@
+
 import ProductModel from '../models/ProductModel.js';
 import CategoryModel from '../models/CategoryModel.js';
 import CartModel from '../models/CartModel.js';
@@ -9,19 +10,23 @@ export default class ProductController {
   constructor() {
     this.detailView = new ProductDetailView();
     this.listView = new ProductViews();
+    this.products = [];
   }
 
   async index() {
     try {
       this.listView.showLoading();
+
       const [categories, products] = await Promise.all([
         CategoryModel.getAll(),
-        ProductModel.getAll(),
+        ProductModel.getAll()
       ]);
+
       this.products = products;
 
       this.listView.renderLayout(categories);
       this.listView.renderProducts(products);
+
       this.listView.bindFilter(filters => this.handleFilter(filters));
       this.listView.bindAddToCart(id => this.handleAddToCart(id));
     } catch (err) {
@@ -33,38 +38,66 @@ export default class ProductController {
     try {
       this.products = await ProductModel.search(filters);
       this.listView.renderProducts(this.products);
+
+      this.listView.bindAddToCart(id => this.handleAddToCart(id));
     } catch (err) {
       alert(err.message);
     }
   }
 
   handleAddToCart(id) {
-    const product = this.products.find(p => p.id === id);
-    if (!product) return;
-    CartModel.add(product);
+    const product = this.products.find(
+      p => String(p.id) === String(id)
+    );
+
+    if (!product) {
+      alert('Không tìm thấy sản phẩm!');
+      return;
+    }
+
+    const success = CartModel.add(product, 1);
+
+    if (success === false) {
+      alert('Không thể thêm sản phẩm vào giỏ hàng!');
+      return;
+    }
+
     updateCartBadge();
-    alert(`Đã thêm "${product.name}" vào giỏ`);
-    this.view = new ProductDetailView();
+    alert(`Đã thêm "${product.name}" vào giỏ hàng!`);
   }
 
   async detail({ id }) {
+    try {
+      this.detailView.showLoading();
 
-    this.detailView.showLoading();
-    const product = await ProductModel.getById(id);
-    const category = await CategoryModel.getById(product.categoryId).catch(() => null);
-
-    this.detailView.render(product, category?.name);
-    this.detailView.bindAddToCart(async qty => {
-      this.view.showLoading();
       const product = await ProductModel.getById(id);
-      const category = await CategoryModel.getById(product.categoryId).catch(() => null);
 
-      this.view.render(product, category?.name);
-      this.view.bindAddToCart(qty => {
-        CartModel.add(product, qty);
+      if (!product) {
+        throw new Error('Không tìm thấy sản phẩm!');
+      }
+
+      const category = await CategoryModel
+        .getById(product.categoryId)
+        .catch(() => null);
+
+      this.detailView.render(product, category?.name || '');
+
+      this.detailView.bindAddToCart(qty => {
+        const quantity = Math.max(1, Math.floor(Number(qty) || 1));
+
+        const success = CartModel.add(product, quantity);
+
+        if (success === false) {
+          alert('Không thể thêm sản phẩm vào giỏ hàng!');
+          return;
+        }
+
         updateCartBadge();
-        alert('Đã thêm vào giỏ hàng');
+        alert(`Đã thêm ${quantity} "${product.name}" vào giỏ hàng!`);
       });
-    })
+    } catch (err) {
+      console.error(err);
+      alert(err.message || 'Không thể tải chi tiết sản phẩm!');
+    }
   }
 }

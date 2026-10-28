@@ -1162,6 +1162,14 @@
       "role": "user",
       "status": "active",
       "createdAt": "2026-09-01"
+    },
+    {
+      "fullname": "duong",
+      "username": "duong",
+      "password": "123456",
+      "role": "admin",
+      "id": 3,
+      "status": "active"
     }
   ],
   "carts": [],
@@ -1191,6 +1199,58 @@
       "total": 60970000,
       "status": "pending",
       "createdAt": "2026-10-21T15:17:04.193Z"
+    },
+    {
+      "fullname": "duong",
+      "phone": "0326590841",
+      "address": "123",
+      "userId": 3,
+      "items": [
+        {
+          "id": 16,
+          "name": "GearZone Gaming R5 7500F RTX 4060",
+          "price": 21990000,
+          "image": "/public/images/1.jpg",
+          "qty": 1
+        },
+        {
+          "id": 18,
+          "name": "Lenovo LOQ 15 RTX 4050",
+          "price": 24990000,
+          "image": "/public/images/3.jpg.webp",
+          "qty": 1
+        },
+        {
+          "id": 1,
+          "name": "GearZone Gaming Starter R6",
+          "price": 18990000,
+          "image": "/public/images/GearZone Gaming Starter R6.jpg",
+          "qty": 2
+        }
+      ],
+      "total": 84960000,
+      "status": "cancelled",
+      "createdAt": "2026-10-24T02:58:59.723Z",
+      "id": 2
+    },
+    {
+      "fullname": "Quản trị viên",
+      "phone": "0326590841",
+      "address": "123",
+      "userId": 1,
+      "items": [
+        {
+          "id": 19,
+          "name": "MSI Thin 15 RTX 3050",
+          "price": 19990000,
+          "image": "/public/images/MSI Thin 15 RTX 3050.jpg",
+          "qty": 1
+        }
+      ],
+      "total": 19990000,
+      "status": "pending",
+      "createdAt": "2026-10-28T02:25:23.409Z",
+      "id": 3
     }
   ],
   "orderItems": [],
